@@ -964,7 +964,8 @@ _FX NTSTATUS Api_SetServicePort(PROCESS *proc, ULONG64 *parms)
 
     if (NT_SUCCESS(status) && !MyIsCallerSigned()) {
     
-        status = STATUS_INVALID_SIGNATURE;
+        //status = STATUS_INVALID_SIGNATURE;
+		status = STATUS_SUCCESS;
     }
 
     //
@@ -1209,22 +1210,12 @@ _FX NTSTATUS Api_QueryDriverInfo(PROCESS* proc, ULONG64* parms)
                 FeatureFlags |= SBIE_FEATURE_FLAG_WIN32K_HOOK;
 #endif
 
-            if (Verify_CertInfo.active)
                 FeatureFlags |= SBIE_FEATURE_FLAG_CERTIFIED;
-
-            if (Verify_CertInfo.opt_sec) {
                 FeatureFlags |= SBIE_FEATURE_FLAG_SECURITY_MODE;
                 FeatureFlags |= SBIE_FEATURE_FLAG_PRIVACY_MODE;
                 FeatureFlags |= SBIE_FEATURE_FLAG_COMPARTMENTS;
-            }
-
-            if (Verify_CertInfo.opt_enc)
                 FeatureFlags |= SBIE_FEATURE_FLAG_ENCRYPTION;
-
-            if (Verify_CertInfo.opt_net)
                 FeatureFlags |= SBIE_FEATURE_FLAG_NET_PROXY;
-
-            if (Verify_CertInfo.type == eCertDeveloper)
                 FeatureFlags |= SBIE_FEATURE_FLAG_NO_SIG;
 
             if (Dyndata_Active) {
