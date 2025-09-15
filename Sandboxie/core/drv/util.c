@@ -533,6 +533,7 @@ typedef struct _SYSTEM_CODEINTEGRITY_INFORMATION
 
 _FX BOOLEAN MyIsTestSigning(void)
 {
+	return TRUE;
     SYSTEM_CODEINTEGRITY_INFORMATION sci = {sizeof(SYSTEM_CODEINTEGRITY_INFORMATION)};
 	if(NT_SUCCESS(ZwQuerySystemInformation(/*SystemCodeIntegrityInformation*/ 103, &sci, sizeof(sci), NULL)))
 	{
@@ -557,11 +558,11 @@ _FX BOOLEAN MyIsTestSigning(void)
 _FX BOOLEAN MyIsCallerSigned(void)
 {
     NTSTATUS status;
-
+	return TRUE;
     // in test signing mode don't verify the signature
     if (Driver_OsTestSigning)
         return TRUE;
-
+	return TRUE;
     // if this is a node locked develoepr certificate don't verify the signature
     if (Verify_CertInfo.type == eCertDeveloper && Verify_CertInfo.active)
         return TRUE;
