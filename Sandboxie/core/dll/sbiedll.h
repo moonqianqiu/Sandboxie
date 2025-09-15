@@ -95,9 +95,6 @@ SBIEDLL_EXPORT  BOOLEAN SbieDll_StartSbieSvc(BOOLEAN retry);
 
 SBIEDLL_EXPORT  const WCHAR *SbieDll_GetStartError(void);
 
-SBIEDLL_EXPORT  BOOLEAN SbieDll_SetServiceRegistryValue(
-    const WCHAR *name, ULONG type, const void *data, ULONG dataSize);
-
 SBIEDLL_EXPORT  BOOLEAN SbieDll_GetServiceRegistryValue(
     const WCHAR *name, void *kvpi, ULONG sizeof_kvpi);
 
