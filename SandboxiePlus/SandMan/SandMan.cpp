@@ -4055,7 +4055,7 @@ void CSandMan::OpenUrl(QUrl url)
 
 	if (scheme == "sbie") {
 			m_pUpdater->RunInstaller(false);
-		else if (path == "/apply")
+		if (path == "/apply")
 			m_pUpdater->ApplyUpdate(COnlineUpdater::eFull, false);
 		else
 			OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
