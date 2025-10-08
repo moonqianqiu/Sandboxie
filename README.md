@@ -1,3 +1,43 @@
+The modified version of the software in this repository is originally developed by **David Xanatos**, with the original repository link: https://github.com/sandboxie-plus/Sandboxie.  
+
+This software is **strictly for personal learning, technical research, or non-commercial exchange only**. The following uses are prohibited:  
+- Commercial use (including but not limited to profit-making, advertising, embedding in paid products, etc.);  
+- Illegal use (such as infringing on others' rights and interests, acts violating laws and regulations);  
+- Infringement on the original software or third parties.  
+
+Please respect the labor and achievements of the original software developers!* We recommend:  
+- Visiting the **[original repository](https://github.com/sandboxie-plus/Sandboxie)** to support the original author (e.g., liking, starring, donating);  
+- Using the original software directly for stable production environments;  
+- Reporting issues with the original software to the original author directly.  
+
+This software is modified for learning purposes and may have the following limitations:  
+- Incomplete functions, compatibility risks, or potential bugs;  
+- No guarantee of stability, security, or ongoing maintenance;  
+- Any issues (e.g., data loss, system anomalies) caused by using this software are the user’s sole responsibility.  
+- The repository and its maintainers are not liable for any legal disputes or losses arising from the use of this software.  
+
+Thank you for the original author’s contributions!*
+
+Модифицированная версия программного обеспечения в этом репозитории изначально разработана **Дэвидом Ксанатосом (David Xanatos)**, ссылка на оригинальный репозиторий: https://github.com/sandboxie-plus/Sandboxie.  
+
+Данное ПО предназначено **исключительно для личного обучения, технических исследований или некоммерческого обмена**. Запрещено использование в следующих целях:  
+- Коммерческое использование (включая, но не ограничиваясь, получением прибыли, рекламой, встраиванием в платные продукты и т.д.);  
+- Незаконное использование (например, нарушение прав и интересов третьих лиц, действия, противоречащие законодательству);  
+- Нарушение авторских прав на оригинальное ПО или прав третьих сторон.  
+
+Уважайте труд и достижения разработчиков оригинального программного обеспечения!* Рекомендуем:  
+- Посетить **[оригинальный репозиторий](https://github.com/sandboxie-plus/Sandboxie)**, чтобы поддержать автора (например, поставить лайк, звёздочку, сделать пожертвование);  
+- Использовать оригинальное ПО напрямую для стабильной производственной среды;  
+- Сообщать об ошибках в оригинальном ПО непосредственно автору.  
+
+Данное ПО модифицировано для учебных целей и может иметь следующие ограничения:  
+- Неполные функции, риски совместимости или потенциальные ошибки (баги);  
+- Нет гарантий стабильности, безопасности или постоянного обслуживания;  
+- Любые проблемы (например, потеря данных, аномалии системы), возникшие из-за использования данного ПО, являются исключительной ответственностью пользователя.  
+- Репозиторий и его maintainers не несут ответственности за юридические споры или убытки, связанные с использованием данного ПО.  
+
+Спасибо автору за его вклад!*
+
 # Sandboxie Plus / Classic
 
 <p align='center'>
