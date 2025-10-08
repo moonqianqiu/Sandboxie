@@ -3258,6 +3258,7 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 
 bool CSettingsWindow::CertRefreshRequired()
 {
+	return false;
 	if (g_CertInfo.active) {
 		if (COnlineUpdater::IsLockRequired() && g_CertInfo.type != eCertEternal && g_CertInfo.type != eCertContributor)
 		{

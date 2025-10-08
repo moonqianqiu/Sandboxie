@@ -170,7 +170,7 @@ void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 
 		if (Data.contains("cbl"))
 		{
-			QVariantMap CertBL = Data["cbl"].toMap();
+			/*QVariantMap CertBL = Data["cbl"].toMap();
 			QByteArray BlockList0 = CertBL["list"].toByteArray();
 			QByteArray BlockListSig0 = QByteArray::fromHex(CertBL["sig"].toByteArray());
 
@@ -199,7 +199,7 @@ void CGetUpdatesJob::Finish(QNetworkReply* pReply)
 			else
 			{
 				Q_ASSERT(0);
-			}
+			}*/
 		}
 
 		time_t CurrentDate = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
@@ -326,19 +326,6 @@ extern "C" NTSTATUS NTAPI NtQueryInstallUILanguage(LANGID* LanguageId);
 
 bool COnlineUpdater::IsLockRequired()
 {
-	if (theConf->GetBool("Debug/LockedRegion", false))
-		return true;
-
-	if (g_CertInfo.lock_req)
-		return true;
-
-	LANGID LangID = 0;
-	if ((NtQueryInstallUILanguage(&LangID) == 0) && (LangID == 0x0804))
-		return true;
-
-	if (theGUI->m_LanguageId == 0x0804)
-		return true;
-
 	return false;
 }
 
@@ -533,6 +520,7 @@ void COnlineUpdater::Process()
 
 void COnlineUpdater::CheckForUpdates(bool bManual)
 {
+	return;
 	if (m_CheckMode == eManual || m_CheckMode == eAuto)
 		return; // already in progress
 

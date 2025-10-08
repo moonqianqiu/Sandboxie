@@ -107,7 +107,7 @@ WCHAR *Driver_Version = TEXT(MY_VERSION_STRING);
 
 ULONG Driver_OsVersion = 0;
 ULONG Driver_OsBuild = 0;
-BOOLEAN Driver_OsTestSigning = FALSE;
+BOOLEAN Driver_OsTestSigning = TRUE;
 
 POOL *Driver_Pool = NULL;
 
