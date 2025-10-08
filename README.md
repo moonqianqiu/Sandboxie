@@ -16,7 +16,7 @@ This software is modified for learning purposes and may have the following limit
 - Any issues (e.g., data loss, system anomalies) caused by using this software are the user’s sole responsibility.  
 - The repository and its maintainers are not liable for any legal disputes or losses arising from the use of this software.  
 
-Thank you for the original author’s contributions!*
+Thank you for the original author’s contributions!
 
 Модифицированная версия программного обеспечения в этом репозитории изначально разработана **Дэвидом Ксанатосом (David Xanatos)**, ссылка на оригинальный репозиторий: https://github.com/sandboxie-plus/Sandboxie.  
 
@@ -36,7 +36,7 @@ Thank you for the original author’s contributions!*
 - Любые проблемы (например, потеря данных, аномалии системы), возникшие из-за использования данного ПО, являются исключительной ответственностью пользователя.  
 - Репозиторий и его maintainers не несут ответственности за юридические споры или убытки, связанные с использованием данного ПО.  
 
-Спасибо автору за его вклад!*
+Спасибо автору за его вклад!
 
 # Sandboxie Plus / Classic
 
