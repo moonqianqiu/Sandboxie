@@ -25,23 +25,23 @@ static EditorSettingInfo GetSettingInfo(int index)
 {
 	static const EditorSettingInfo settings[SETTING_COUNT] = {
 		// ValidateIniKeys
-		{"Options/ValidateIniKeys", "Validate INI Keys", false, 2, 
-		 "No validation", "-", "Full validation (default)"},
+		{"Options/ValidateIniKeys", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Validate INI Keys"), false, 2, 
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "No validation"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Full validation (default)")},
 		// EnableIniTooltips
-		{"Options/EnableIniTooltips", "Enable INI Tooltips", true, 1,
-		 "No tooltips", "Basic info (default)", "Full details"},
+		{"Options/EnableIniTooltips", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable INI Tooltips"), true, 1,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "No tooltips"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Basic info (default)"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Full details")},
 		// EnablePopupTooltips
-		{"Options/EnablePopupTooltips", "Enable Popup Tooltips", true, 1,
-		 "No tooltips", "Basic info (default)", "Full details"},
+		{"Options/EnablePopupTooltips", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable Popup Tooltips"), true, 1,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "No tooltips"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Basic info (default)"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Full details")},
 		// AutoCompletionConsent
-		{"Options/AutoCompletionConsent", "Auto Completion Consent", false, 0,
-		 "Not consented (default)", "-", "Consented"},
+		{"Options/AutoCompletionConsent", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Auto Completion Consent"), false, 0,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Not consented (default)"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Consented")},
 		// EnableAutoCompletion
-		{"Options/EnableAutoCompletion", "Enable Auto Completion", true, 0,
-		 "Disabled (default)", "Manual/Case", "Auto/Case"},
+		{"Options/EnableAutoCompletion", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable Auto Completion"), true, 0,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Manual"), QT_TRANSLATE_NOOP("CEditorSettingsWindow", "While Typing")},
 		// EnableFuzzyMatching
-		{"Options/EnableFuzzyMatching", "Enable Fuzzy Matching", false, 0,
-		 "Disabled (default)", "-", "Enabled"}
+		{"Options/EnableFuzzyMatching", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enable Fuzzy Matching"), false, 0,
+		 QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Disabled (default)"), "-", QT_TRANSLATE_NOOP("CEditorSettingsWindow", "Enabled")}
 	};
 	
 	return (index >= 0 && index < SETTING_COUNT) ? settings[index] : settings[0];
@@ -70,6 +70,10 @@ CEditorSettingsWindow::CEditorSettingsWindow(QWidget *parent)
 	LoadSettings();
 	StoreOriginalValues();
 	UpdateTable();
+
+	// Set Reset All button text and tooltip from code so translations are sourced here
+	ui.btnResetAll->setText(tr("Reset All to Defaults"));
+	ui.btnResetAll->setToolTip(tr("Reset all settings to their default values and remove custom config entries."));
 	
 	// Initialize previous consent state after loading settings
 	m_previousConsentState = chkAutoCompletionConsent->isChecked();
@@ -164,7 +168,7 @@ void CEditorSettingsWindow::InitializeTable()
 	ui.settingsTable->setColumnCount(6);
 	
 	QStringList headers;
-	headers << "Setting" << "State" << "Unchecked/Disabled" << "Partial/Basic" << "Checked/Full" << "Reset";
+	headers << tr("Setting") << tr("State") << tr("Unchecked") << tr("Partial") << tr("Checked") << tr("Reset");
 	ui.settingsTable->setHorizontalHeaderLabels(headers);
 	
 	// Create checkboxes based on setting metadata
@@ -189,18 +193,22 @@ void CEditorSettingsWindow::InitializeTable()
 		ui.settingsTable->setItem(i, 0, nameItem);
 		
 		// Column 1: State (checkbox)
-		ui.settingsTable->setCellWidget(i, 1, checkboxes[i]);
-		
+		QWidget* cbContainer = new QWidget(this);
+		QHBoxLayout* cbLayout = new QHBoxLayout(cbContainer);
+		cbLayout->setContentsMargins(0, 0, 0, 0);
+		cbLayout->addWidget(checkboxes[i], 0, Qt::AlignCenter);
+		ui.settingsTable->setCellWidget(i, 1, cbContainer);
+
 		// Column 5: Reset button
-		QPushButton* resetBtn = new QPushButton("Reset", this);
-		resetBtn->setToolTip("Reset this setting to default value");
+		QPushButton* resetBtn = new QPushButton(tr("Reset"), this);
+		resetBtn->setToolTip(tr("Reset this setting to default value"));
 		resetBtn->setMaximumWidth(60);
 		ui.settingsTable->setCellWidget(i, 5, resetBtn);
-		
+
 		// Connect reset button
 		connect(resetBtn, &QPushButton::clicked, this, [this, i]() {
 			ResetIndividualSetting(i);
-		});
+			});
 		
 		// Connect checkbox signals
 		connect(checkboxes[i], SIGNAL(stateChanged(int)), this, SLOT(ClearResetFlags()));
@@ -303,6 +311,9 @@ void CEditorSettingsWindow::OnSettingChanged()
 		}
 	}
 	
+	// Decide whether the app is using a dark palette so we can pick contrasting highlight colors
+	bool darkMode = (QApplication::palette().color(QPalette::Window).lightness() < 128);
+
 	// Highlight current states with color-coded backgrounds
 	for (int i = 0; i < SETTING_COUNT && i < ui.settingsTable->rowCount(); ++i) {
 		QCheckBox* cb = GetCheckBoxByIndex(i);
@@ -311,26 +322,47 @@ void CEditorSettingsWindow::OnSettingChanged()
 		int state = cb->checkState();
 		int col = 2; // Default to unchecked column (index 2)
 		QColor highlightColor;
+		QColor fgColor = QApplication::palette().color(QPalette::Text);
 		
 		if (state == Qt::Checked) {
 			col = 4; // Checked column (index 4)
-			highlightColor = QColor(144, 238, 144); // Light green for enabled/checked
+			if (darkMode) {
+				highlightColor = QColor(0, 150, 0, 160); // semi-transparent green for dark mode
+				fgColor = QColor(255, 255, 255);
+			} else {
+				highlightColor = QColor(144, 238, 144); // Light green for enabled/checked
+				fgColor = QColor(0, 0, 0);
+			}
 		} else if (state == Qt::PartiallyChecked) {
 			col = 3; // Partial column (index 3)
-			highlightColor = QColor(255, 255, 153); // Light yellow for partial/basic
+			if (darkMode) {
+				highlightColor = QColor(200, 200, 0, 160); // darker yellow for dark mode
+				fgColor = QColor(0, 0, 0);
+			} else {
+				highlightColor = QColor(255, 255, 153); // Light yellow for partial/basic
+				fgColor = QColor(0, 0, 0);
+			}
 		} else {
 			col = 2; // Unchecked column (index 2)
-			highlightColor = QColor(255, 182, 193); // Light red/pink for disabled/unchecked
+			if (darkMode) {
+				highlightColor = QColor(200, 50, 50, 160); // reddish tint for dark mode
+				fgColor = QColor(255, 255, 255);
+			} else {
+				highlightColor = QColor(255, 182, 193); // Light red/pink for disabled/unchecked
+				fgColor = QColor(0, 0, 0);
+			}
 		}
 		
 		QTableWidgetItem* item = ui.settingsTable->item(i, col);
 		if (item && item->text() != "-") {
 			// Apply color-coded highlighting
-			item->setData(Qt::BackgroundRole, highlightColor);
+			item->setData(Qt::BackgroundRole, QBrush(highlightColor));
 			// Also make the text bold for better visibility
 			QFont font = item->font();
 			font.setBold(true);
 			item->setFont(font);
+			// Set foreground to ensure contrast in dark mode
+			item->setForeground(QBrush(fgColor));
 		}
 	}
 	

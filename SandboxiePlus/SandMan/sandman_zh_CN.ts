@@ -1125,8 +1125,143 @@ You can click Finish to close this wizard.</source>
 <context>
     <name>CEditorSettingsWindow</name>
     <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="28"/>
+        <source>Validate INI Keys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
+        <source>No validation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="29"/>
+        <source>Full validation (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="31"/>
+        <source>Enable INI Tooltips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
+        <source>No tooltips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
+        <source>Basic info (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="32"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="35"/>
+        <source>Full details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="34"/>
+        <source>Enable Popup Tooltips</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="37"/>
+        <source>Auto Completion Consent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
+        <source>Not consented (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="38"/>
+        <source>Consented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="40"/>
+        <source>Enable Auto Completion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
+        <source>Disabled (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
+        <source>Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="41"/>
+        <source>While Typing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="43"/>
+        <source>Enable Fuzzy Matching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="44"/>
+        <source>Enabled</source>
+        <translation type="unfinished">启用</translation>
+    </message>
+    <message>
         <location filename="Windows/EditorSettingsWindow.cpp" line="55"/>
         <source>Editor Settings</source>
+        <translation>编辑器设置</translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="75"/>
+        <source>Reset All to Defaults</source>
+        <translation type="unfinished">全部重置为默认值</translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="76"/>
+        <source>Reset all settings to their default values and remove custom config entries.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <source>Setting</source>
+        <translation type="unfinished">设置</translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <source>State</source>
+        <translation type="unfinished">状态</translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <source>Unchecked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <source>Partial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <source>Checked</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="171"/>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="203"/>
+        <source>Reset</source>
+        <translation type="unfinished">重置</translation>
+    </message>
+    <message>
+        <location filename="Windows/EditorSettingsWindow.cpp" line="204"/>
+        <source>Reset this setting to default value</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2467,53 +2602,85 @@ Note: The update check is often behind the latest GitHub release to ensure that 
         <translation>部分变更未保存，您确定要关闭这个选项窗口吗？</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1765"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1771"/>
         <source>Autocomplete Consent Required</source>
         <translation>需要同意启用自动完成</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1767"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1773"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
+        <translation>自动完成功能需要您的同意才能继续。</translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="1775"/>
+        <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
+
+Choose autocomplete mode:
+%1 Manual: Autocomplete suggestions with %2.
+%1 While Typing: Autocomplete suggestions while typing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1769"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1783"/>
+        <source>Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="1784"/>
+        <source>Triggers autocomplete suggestions with %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="1786"/>
+        <source>While Typing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="1787"/>
+        <source>Triggers autocomplete suggestions while typing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/OptionsWindow.cpp" line="1790"/>
+        <source>Keeps autocomplete suggestions disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
 • Basic: Manual completion (Ctrl+Space) with case correction
 • Full: Automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">如果您不确定自动完成弹出窗口中显示的设置，我们强烈建议您在继续之前查阅软件的文档或源代码。 在没有正确理解的情况下启用此功能可能会导致意想不到的后果，您将对此承担全部责任。
+
+选择自动完成模式：
+• 基本：手动完成（Ctrl+空格）并进行大小写更正
+• 完整：键入时自动完成并进行大小写更正</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1775"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">基本</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1776"/>
         <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">仅启用手动完成 (Ctrl+Space) 并进行大小写更正</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1778"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">完整</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1779"/>
         <source>Enable automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">在键入时启用自动完成并进行大小写更正</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1781"/>
+        <location filename="Windows/OptionsWindow.cpp" line="1789"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
-        <location filename="Windows/OptionsWindow.cpp" line="1782"/>
         <source>Keep autocomplete disabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">保持自动完成功能处于禁用状态</translation>
     </message>
     <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
@@ -6549,48 +6716,80 @@ You can request up to %3 evaluation certificates for each unique hardware ID.</s
         <translation>试用许可证已成功申请。 请开始免费试用！</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3346"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3352"/>
         <source>Autocomplete feature requires your consent to proceed.</source>
+        <translation>自动完成功能需要您的同意才能继续。</translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3354"/>
+        <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
+
+Choose autocomplete mode:
+%1 Manual: Autocomplete suggestions with %2.
+%1 While Typing: Autocomplete suggestions while typing.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3348"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3362"/>
+        <source>Manual</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3363"/>
+        <source>Triggers autocomplete suggestions with %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3365"/>
+        <source>While Typing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3366"/>
+        <source>Triggers autocomplete suggestions while typing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Windows/SettingsWindow.cpp" line="3369"/>
+        <source>Keeps autocomplete suggestions disabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>If you are unsure about the settings displayed in the autocomplete popup, we strongly recommend consulting the software&apos;s documentation or source code before proceeding. Enabling this feature without proper understanding may lead to unintended consequences, for which you will be solely responsible.
 
 Choose autocomplete mode:
 • Basic: Manual completion (Ctrl+Space) with case correction
 • Full: Automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">如果您不确定自动完成弹出窗口中显示的设置，我们强烈建议您在继续之前查阅软件的文档或源代码。 在没有正确理解的情况下启用此功能可能会导致意想不到的后果，您将对此承担全部责任。
+
+选择自动完成模式：
+• 基本：手动完成（Ctrl+空格）并进行大小写更正
+• 完整：键入时自动完成并进行大小写更正</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3354"/>
         <source>Basic</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">基本</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3355"/>
         <source>Enable manual completion only (Ctrl+Space) with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">仅启用手动完成 (Ctrl+Space) 并进行大小写更正</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3357"/>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">完整</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3358"/>
         <source>Enable automatic completion while typing with case correction</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">在键入时启用自动完成并进行大小写更正</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3360"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3368"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3361"/>
         <source>Keep autocomplete disabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">保持自动完成功能处于禁用状态</translation>
     </message>
     <message>
         <location filename="Engine/BoxObject.cpp" line="91"/>
@@ -7005,7 +7204,7 @@ Right-click to copy</oldsource>
         <translation>你真的想删除选定的本地模板吗？</translation>
     </message>
     <message>
-        <location filename="Windows/SettingsWindow.cpp" line="3344"/>
+        <location filename="Windows/SettingsWindow.cpp" line="3350"/>
         <source>Autocomplete Consent Required</source>
         <translation>需要同意启用自动完成</translation>
     </message>
@@ -8053,7 +8252,7 @@ If you are a great patreaon supporter already, sandboxie can check online for an
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="14"/>
         <source>Editor Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器设置</translation>
     </message>
     <message>
         <location filename="Forms/EditorSettingsWindow.ui" line="41"/>
@@ -8061,44 +8260,36 @@ If you are a great patreaon supporter already, sandboxie can check online for an
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="91"/>
         <source>Setting</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">设置</translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="96"/>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">状态</translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="101"/>
         <source>Unchecked/Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">未选中/禁用</translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="106"/>
         <source>Partial/Basic</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">部分/基本</translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="111"/>
         <source>Checked/Full</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">已选中/完整</translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="116"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">重置</translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="126"/>
         <source>Reset All to Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">全部重置为默认值</translation>
     </message>
     <message>
-        <location filename="Forms/EditorSettingsWindow.ui" line="129"/>
         <source>Reset all settings to their default values and remove custom config entries</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">将所有设置重置为默认值并删除自定义配置条目</translation>
     </message>
 </context>
 <context>
@@ -10383,12 +10574,12 @@ Sandboxie 提供了针对这些情况的处理选项，可以在此页面进行�
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6168"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器设置</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6171"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/OptionsWindow.ui" line="6092"/>
@@ -11129,12 +11320,12 @@ Tooltips include version details, syntax requirements, and descriptions to help 
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3262"/>
         <source>Editor settings</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑器设置</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3265"/>
         <source>⚙</source>
-        <translation type="unfinished"></translation>
+        <translation>⚙</translation>
     </message>
     <message>
         <location filename="Forms/SettingsWindow.ui" line="3209"/>
