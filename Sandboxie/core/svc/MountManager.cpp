@@ -1125,11 +1125,6 @@ bool MountManager::AcquireBoxRoot(const WCHAR* boxname, const WCHAR* reg_root, c
     std::wstring TargetNtPath;
 
     SCertInfo CertInfo = { 0 };
-    if ((UseFileImage || UseRamDisk)) {
-        const WCHAR* strings[] = { boxname, UseFileImage ? L"UseFileImage" : L"UseRamDisk" , NULL };
-        SbieApi_LogMsgExt(session_id, UseFileImage ? 6009 : 6008, strings);
-        errlvl = 0x66;
-    } else
 
     if(!pRoot->Mount || pRoot->Mount->NtPath.empty()) {
 //        SbieApi_LogEx(session_id, 2201, L"AcquireBoxRoot %S", boxname);
