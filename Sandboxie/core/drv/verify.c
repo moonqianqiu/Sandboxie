@@ -563,6 +563,8 @@ _FX NTSTATUS KphValidateCertificate()
     LARGE_INTEGER cert_date = { 0 };
     LARGE_INTEGER check_date = { 0 };
     LONG days = 0;
+    BOOLEAN node_lock = FALSE;
+    BOOLEAN node_pass = FALSE;
 
     Verify_CertInfo.State = 1; // clear
     Verify_CertInfo.type = eCertEternal;
@@ -642,6 +644,7 @@ _FX NTSTATUS KphValidateCertificate()
     LARGE_INTEGER expiration_date = { 0 };
     BOOLEAN bNoCR = TRUE;
     expiration_date.QuadPart = -1; // at the end of time (never)
+
 
 CleanupExit:
     if(CertDbg)     DbgPrint("Sbie Cert status: %08x; active: %d\n", status, Verify_CertInfo.active);
