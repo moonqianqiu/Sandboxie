@@ -563,10 +563,11 @@ _FX NTSTATUS KphValidateCertificate()
     LARGE_INTEGER cert_date = { 0 };
     LARGE_INTEGER check_date = { 0 };
     LONG days = 0;
-    BOOLEAN node_lock = FALSE;
-    BOOLEAN node_pass = FALSE;
+    BOOLEAN node_lock = TRUE;
+    BOOLEAN node_pass = TRUE;
 
     Verify_CertInfo.State = 1; // clear
+	Verify_CertInfo.locked = 1;
     Verify_CertInfo.type = eCertEternal;
 	Verify_CertInfo.level = eCertMaxLevel;
 	Verify_CertInfo.opt_sec = 1;
