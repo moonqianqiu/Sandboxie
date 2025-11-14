@@ -5,7 +5,7 @@ This software is **strictly for personal learning, technical research, or non-co
 - Illegal use (such as infringing on others' rights and interests, acts violating laws and regulations);  
 - Infringement on the original software or third parties.  
 
-Please respect the labor and achievements of the original software developers!* We recommend:  
+Please respect the labor and achievements of the original software developers! We recommend:  
 - Visiting the **[original repository](https://github.com/sandboxie-plus/Sandboxie)** to support the original author (e.g., liking, starring, donating);  
 - Using the original software directly for stable production environments;  
 - Reporting issues with the original software to the original author directly.  
@@ -25,7 +25,7 @@ Thank you for the original author’s contributions!
 - Незаконное использование (например, нарушение прав и интересов третьих лиц, действия, противоречащие законодательству);  
 - Нарушение авторских прав на оригинальное ПО или прав третьих сторон.  
 
-Уважайте труд и достижения разработчиков оригинального программного обеспечения!* Рекомендуем:  
+Уважайте труд и достижения разработчиков оригинального программного обеспечения! Рекомендуем:  
 - Посетить **[оригинальный репозиторий](https://github.com/sandboxie-plus/Sandboxie)**, чтобы поддержать автора (например, поставить лайк, звёздочку, сделать пожертвование);  
 - Использовать оригинальное ПО напрямую для стабильной производственной среды;  
 - Сообщать об ошибках в оригинальном ПО непосредственно автору.  
