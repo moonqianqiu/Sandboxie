@@ -1,167 +1,289 @@
-# LICENSE.Plus (Modified Fork Version)
-**Revision 2025.11.20 — For Educational and Open-Source Compliance**
+                 LICENSE.Plus (MODIFIED FORK VERSION)                 
+                         Revision 2025.11.20                          
 
-## Copyright Notice
-Copyright (c) 2025 moonqianqiu (Modifications to Sandboxie-Plus; see commit history for details)  
-Copyright (c) 2020–2025 David Xanatos (Original Sandboxie-Plus Software)
+ Copyright (c) 2025 moonqianqiu (Modifications to Sandboxie-Plus; see commit history for details)
+ Copyright (c) 2020-2025 David Xanatos (Original Sandboxie-Plus Software)
 
----
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
 
-## 1. Preamble
-This document defines the terms and conditions for the modified version of the Sandboxie-Plus software ("Modified Software") maintained under the GitHub repository:  
-`https://github.com/moonqianqiu/Sandboxie`
+                               Preamble                               
 
-The Modified Software is a derivative work based on the original Sandboxie-Plus software ("Original Software") developed and copyrighted by David Xanatos, available at:  
-`https://github.com/sandboxie-plus/Sandboxie`
+  This document defines the terms and conditions for the modified version
+of the Sandboxie-Plus software ("Modified Software") maintained under the
+GitHub repository: https://github.com/moonqianqiu/Sandboxie
 
-### Key Compliance Principle
-This Modified License supplements (but does not supersede) the Original Software’s licenses:  
-- LICENSE.Plus (Custom License by David Xanatos)  
-- LICENSE.Classic (GNU General Public License v3.0, "GPLv3")  
-- All sub-component licenses (listed in Section 7)  
+  The Modified Software is a derivative work based on the original
+Sandboxie-Plus software ("Original Software") developed and copyrighted
+by David Xanatos, available at: https://github.com/sandboxie-plus/Sandboxie
 
-In the event of a conflict between this document and any upstream license (original or sub-component), the **upstream license shall prevail**. Nothing herein shall limit, modify, or override the rights granted to users under GPLv3 or other upstream licenses.
+  This Modified License supplements (but does not supersede) the Original
+Software's licenses, including LICENSE.Plus (Custom License by David
+Xanatos), LICENSE.Classic (GNU General Public License v3.0, "GPLv3"), and
+all sub-component licenses. In the event of a conflict between this
+document and any upstream license, the upstream license shall prevail.
 
----
+  The Modified Software is primarily created for educational, technical
+research, and non-commercial study purposes. It exists to facilitate code
+structure learning, sandboxing mechanism analysis, and open-source
+experimentation. It is not intended as a replacement for the official
+Sandboxie-Plus builds for production environments.
 
-## 2. Purpose and Intent
-The Modified Software is primarily created for **educational, technical research, and non-commercial study purposes**. It exists to facilitate:  
-- Code structure learning and programming technique exploration  
-- Sandboxing mechanism analysis and open-source experimentation  
-- Non-profit knowledge sharing within the developer community  
+                         TERMS AND CONDITIONS                         
 
-It is not intended as a replacement for the official Sandboxie-Plus builds for production environments (see Section 8 for recommendations).
+  0. Definitions.
 
----
+  "This License" refers to Revision 2025.11.20 of the LICENSE.Plus
+(Modified Fork Version).
 
-## 3. No Warranty and Disclaimer of Liability
-### 3.1 AS-IS Distribution
-The Modified Software is provided "AS IS", without warranty of any kind, express or implied, including but not limited to:  
-- Warranties of merchantability or fitness for a particular purpose  
-- Warranties of title, non-infringement, or uninterrupted functionality  
+  "Modified Software" refers to the modified version of Sandboxie-Plus
+software maintained under the GitHub repository: https://github.com/
+moonqianqiu/Sandboxie.
 
-### 3.2 No Responsibility for Modifications
-The Fork Maintainer (moonqianqiu) does not guarantee the correctness, completeness, security, or reliability of the modifications. All code changes, configurations, and related materials are provided solely for educational demonstration.
+  "Original Software" refers to the original Sandboxie-Plus software
+developed and copyrighted by David Xanatos, available at: https://github.com/
+sandboxie-plus/Sandboxie.
 
-### 3.3 Full User Responsibility
-By using, compiling, distributing, or otherwise interacting with the Modified Software, you agree to assume all risks and liabilities arising therefrom, including but not limited to:  
-- System instability, crashes, or data loss  
-- Security vulnerabilities or software conflicts  
-- Violations of third-party rights or applicable local laws  
-- Direct, indirect, incidental, or consequential damages (including legal costs or financial loss)
+  "Fork Maintainer" refers to moonqianqiu, the maintainer of the Modified
+Software.
 
-### 3.4 Limitation of Liability
-Neither the Fork Maintainer (moonqianqiu) nor the Original Author (David Xanatos) shall be liable for any claim, damage, or legal dispute arising from the use or distribution of the Modified Software, to the maximum extent permitted by applicable law.
+  "Original Author" refers to David Xanatos, the original developer of
+Sandboxie-Plus.
 
----
+  "User" or "you" refers to any individual or organization that uses,
+copies, modifies, or distributes the Modified Software.
 
-## 4. Permitted Uses
-The Modified Software may be used for the following purposes, provided all upstream license requirements are met:  
+  "Upstream Licenses" refers to the Original Software's LICENSE.Plus,
+LICENSE.Classic (GPLv3), and all sub-component licenses listed in
+Section 7.
 
-### 4.1 Non-Commercial Educational/Research Use
-- Personal learning of software architecture or programming techniques  
-- Academic research (including internal use by non-profit educational institutions)  
-- Non-commercial knowledge exchange (e.g., open-source community code reviews, pull requests)  
+  1. Basic Principles.
 
-### 4.2 Commercial Use (Compliance Required)
-Commercial use, distribution, or monetization is permitted **only if fully compliant with GPLv3 and all upstream licenses**, including (but not limited to):  
-- Provision of complete, publicly accessible source code for all modifications  
-- Retention of all copyright and license notices  
-- Distribution of derivatives under GPLv3 (or compatible licenses, as required by upstream terms)  
+  1.1 Compliance with Upstream Licenses
+  This Modified License supplements but does not supersede the Upstream
+Licenses. In the event of a conflict between this document and any
+Upstream License, the Upstream License shall prevail.
 
----
+  1.2 Purpose and Intent
+  The Modified Software is primarily created for educational, technical
+research, and non-commercial study purposes. It is not intended as a
+replacement for the official Sandboxie-Plus builds for production
+environments.
 
-## 5. Prohibited Uses
-The following uses are strictly prohibited, regardless of commercial intent:  
+  2. No Warranty and Disclaimer of Liability.
 
-### 5.1 Illegal or Harmful Activities
-- Use in violation of applicable laws, regulations, or ethical standards  
-- Infringement of third-party intellectual property (copyrights, trademarks, privacy rights, etc.)  
-- Creation or distribution of malicious derivatives (e.g., malware, deceptive software)  
+  2.1 AS-IS Distribution
+  The Modified Software is provided "AS IS", without warranty of any
+kind, express or implied, including but not limited to warranties of
+merchantability, fitness for a particular purpose, title, or
+non-infringement.
 
-### 5.2 Misleading or Unauthorized Distribution
-- Distribution of modified binaries without accompanying full source code (violates GPLv3)  
-- Removal, alteration, or obfuscation of copyright notices or license texts  
-- Misrepresentation of authorship (e.g., claiming original ownership of the Original Software)  
-- Use of the Original Software’s official branding (e.g., "Sandboxie-Plus" logos) without explicit permission from David Xanatos  
+  2.2 No Responsibility for Modifications
+  The Fork Maintainer provides the modifications without any guarantee of
+correctness, completeness, functionality, or safety. All code changes,
+configurations, and related materials are offered purely for educational
+demonstration.
 
----
+  2.3 Full User Responsibility
+  By using, compiling, distributing, or otherwise handling this software,
+you agree that you alone assume all risks and responsibilities arising
+from such use, including but not limited to:
+    • System instability, crashes, or data loss
+    • Security vulnerabilities or software conflicts
+    • Violation of third-party rights or local laws
+    • Any direct or indirect damages, including legal costs, financial
+      loss, or consequential harm
 
-## 6. Modification and Redistribution Rules
-Any modification or redistribution of the Modified Software must comply with both this section and all upstream license requirements:  
+  2.4 Limitation of Liability
+  The Fork Maintainer and Original Author shall under no circumstances be
+held liable for any claim, damage, or legal dispute related to this
+Modified Software.
 
-### 6.1 Preserve Attribution
-- Retain all original and modified copyright notices  
-- Clearly acknowledge both the Original Author (David Xanatos) and Fork Maintainer (moonqianqiu)  
-- Include links to the original repository (`https://github.com/sandboxie-plus/Sandboxie`) and modified repository (`https://github.com/moonqianqiu/Sandboxie`)  
+  3. Permitted Uses.
 
-### 6.2 Disclose Source Code
-- Provide complete, publicly accessible source code for all modifications (including build instructions)  
-- Maintain a clear commit history or changelog documenting all changes to the Original Software  
+  3.1 Non-Commercial Educational/Research Use
+  The Modified Software may be used for:
+    • Personal learning of software structure or programming techniques
+    • Academic or technical research in a non-commercial context
+    • Non-commercial exchange of ideas or improvements within open-source
+      or research communities
 
-### 6.3 Respect Naming Rules
-- Do not use names, logos, or branding that mislead users into believing the Modified Software is the official Sandboxie-Plus release  
-- Include the term "fork" or "modified" in public release names (e.g., "Sandboxie-Plus Fork [moonqianqiu]" or "Modified Sandboxie")  
+  3.2 Commercial Use (Compliance Required)
+  Commercial use, distribution, or monetization is permitted only if
+fully compliant with GPLv3 and all Upstream Licenses, including but not
+limited to:
+    • Provision of complete, publicly accessible source code for all
+      modifications
+    • Retention of all copyright and license notices
+    • Distribution of derivatives under GPLv3 or compatible licenses
 
-### 6.4 Comply with Upstream Terms
-- All redistribution must adhere to the Original Software’s LICENSE.Plus, LICENSE.Classic (GPLv3), and sub-component licenses  
-- Derivatives must be licensed under GPLv3 (or compatible licenses, as required by upstream)  
+  4. Prohibited Uses.
 
-### 6.5 Encourage Community Collaboration
-- Improvements, bug fixes, or useful features are strongly encouraged to be contributed back to the upstream Sandboxie-Plus repository (via pull requests or patches) to benefit the broader community  
+  4.1 Illegal or Harmful Activities
+  The following uses are strictly prohibited:
+    • Use in violation of applicable laws or regulations
+    • Infringement of copyright, privacy, or intellectual-property rights
+    • Creation or distribution of malicious, deceptive, or harmful
+      derivatives
 
----
+  4.2 Misleading or Unauthorized Distribution
+  The following distribution practices are strictly prohibited:
+    • Distribution of modified binaries without accompanying full source
+      code
+    • Removal or alteration of copyright or authorship notices
+    • Misrepresentation of authorship or project origin
+    • Use of the original software name without clear fork identification
+    • Use of the Original Software's official branding without explicit
+      permission from David Xanatos
 
-## 7. Included Sub-Components and Licenses
-The Modified Software incorporates third-party components covered by the following licenses, which remain in full force and effect. Non-compliance with any sub-component license automatically terminates your right to use the Modified Software.
+  5. Modification and Redistribution Rules.
 
-| Component          | License                          | Key Compliance Note                                                                 |
-|---------------------|----------------------------------|-------------------------------------------------------------------------------------|
-| Sandboxie Core      | GNU General Public License v3.0  | Derivatives must be licensed under GPLv3; source code must be provided on distribution |
-| SandMan (UI)        | Custom License (David Xanatos)   | Follow all terms in the Original Software’s LICENSE.Plus                            |
-| QSbieAPI            | LGPL (Lesser GPL)                | Dynamic linking does not require open-sourcing the entire Modified Software; modified versions of this component must be licensed under LGPL |
-| MiscHelpers         | LGPL (Lesser GPL)                | Same as above                                                                       |
-| Qt Framework        | LGPL (Lesser GPL)                | Same as above; comply with Qt’s attribution requirements                            |
-| UglobalHotkey       | Public Domain                    | No attribution required, but modification is permitted                              |
-| QtSingleApp         | BSD License                      | Retain original copyright notices; no additional restrictions beyond BSD terms      |
+  If you modify or redistribute this Modified Software, you must comply
+with all of the following requirements:
 
----
+  5.1 Preserve Attribution
+    • Retain all original and modified license texts and copyright notices
+    • Clearly acknowledge both the Original Author (David Xanatos) and the
+      Fork Maintainer (moonqianqiu)
+    • Include links to the original repository (https://github.com/
+      sandboxie-plus/Sandboxie) and modified repository (https://github.com/
+      moonqianqiu/Sandboxie)
 
-## 8. Recommendations (Non-Legally Binding)
-To support the open-source community and respect the Original Author’s work, users are strongly encouraged to:  
-- Star, fork, or contribute to the original Sandboxie-Plus repository  
-- Report bugs or feature ideas directly to David Xanatos via the upstream repository  
-- Support the Original Author through official donation channels or licensed products  
-- Use official Sandboxie-Plus builds for production or mission-critical environments  
+  5.2 Disclose Source Code
+    • Provide complete, publicly accessible source code including all
+      modifications
+    • Maintain a clear commit history or changelog documenting all changes
+      to the Original Software
+    • Include build instructions and any other information necessary to
+      compile and use the Modified Software
 
-### Mandatory Attribution Format
-When distributing or referencing the Modified Software, include the following attribution:  
-> Original Author: David Xanatos  
-> Original Repository: https://github.com/sandboxie-plus/Sandboxie  
-> Fork Maintainer: moonqianqiu  
-> Modified Repository: https://github.com/moonqianqiu/Sandboxie  
-> License: GPLv3 + Modified Fork Supplemental Terms  
+  5.3 Respect Naming Rules
+    • Do not rename the software to mislead users into thinking it is the
+      official version
+    • Include the term "fork" or "modified" in any public release name
+    • Do not use names, logos, or branding that mislead users into
+      believing the Modified Software is the official Sandboxie-Plus
+      release
 
----
+  5.4 Comply with Upstream Terms
+    • All redistribution remains subject to the original Sandboxie-Plus
+      license terms and sub-component licenses
+    • Derivatives must be licensed under GPLv3 or compatible licenses as
+      required by upstream terms
 
-## 9. Final Legal Terms
-### 9.1 Entire Agreement
-This document, together with the Original Software’s licenses and sub-component licenses, constitutes the complete agreement governing the Modified Software.
+  5.5 Encourage Community Collaboration
+    • Improvements or useful changes should, when possible, be made
+      available to the upstream project to benefit the community
+    • Contribute back to the original Sandboxie-Plus repository through
+      pull requests or patches when appropriate
 
-### 9.2 Severability
-If any provision of this license is found invalid or unenforceable under applicable law, the remaining provisions shall remain in full effect.
+  6. Included Sub-Components and Licenses.
 
-### 9.3 Termination
-Your rights under this license automatically terminate if you violate any of its terms or the terms of any upstream license. Termination of this license does not affect rights granted to you under upstream licenses (e.g., GPLv3) if you continue to comply with those terms.
+  This software contains components covered under the following licenses,
+which remain in full force and must accompany any redistributed copies
+of the software. Failure to comply with these component licenses
+automatically voids your rights to use or distribute the Modified
+Software.
 
-### 9.4 Jurisdiction
-This license shall be interpreted in accordance with international copyright law and open-source licensing principles. Disputes shall be resolved under the laws of the jurisdiction where the user resides, unless superseded by upstream license requirements.
+  Component          | License                          | Key Compliance Note
+  -------------------|----------------------------------|-----------------------------------------
+  Sandboxie Core      | GNU General Public License v3.0  | Derivatives must be licensed under GPLv3;
+                    |                                  | source code must be provided on
+                    |                                  | distribution
+  SandMan (UI)        | Custom License (David Xanatos)   | Follow all terms in the Original
+                    |                                  | Software's LICENSE.Plus
+  QSbieAPI            | LGPL (Lesser GPL)                | Dynamic linking does not require
+                    |                                  | open-sourcing the entire Modified
+                    |                                  | Software; modified versions of
+                    |                                  | this component must be licensed
+                    |                                  | under LGPL
+  MiscHelpers         | LGPL (Lesser GPL)                | Same as above
+  Qt Framework        | LGPL (Lesser GPL)                | Same as above; comply with Qt's
+                    |                                  | attribution requirements
+  UglobalHotkey       | Public Domain                    | No attribution required, but
+                    |                                  | modification is permitted
+  QtSingleApp         | BSD License                      | Retain original copyright notices;
+                    |                                  | no additional restrictions beyond
+                    |                                  | BSD terms
 
-### 9.5 No Endorsement
-This fork and its maintainer (moonqianqiu) are not affiliated with, endorsed by, or officially supported by David Xanatos or xanasoft.com.
+  7. Recommendations (Non-Legally Binding).
 
----
+  While not legally binding, users are strongly encouraged to:
+    • Star, fork, or contribute to the original Sandboxie-Plus repository
+    • Report bugs or feature ideas directly to the Original Author
+    • Support the developer through donations or official channels
+    • Use the official Sandboxie-Plus builds for production environments
 
-END OF LICENSE.Plus (Modified Fork Version)  
-Last Updated: 2025-11-20  
-Compliance Reference: GPLv3 (GNU General Public License Version 3, 29 June 2007)
+  7.1 Mandatory Attribution Format
+  When distributing or referencing the Modified Software, include the
+following attribution:
+
+    Original Author:    David Xanatos
+    Original Repository: https://github.com/sandboxie-plus/Sandboxie
+    Fork Maintainer:    moonqianqiu
+    Modified Repository: https://github.com/moonqianqiu/Sandboxie
+    License:           GPLv3 + Modified Fork Supplemental Terms
+
+  8. Final Legal Terms.
+
+  8.1 Entire Agreement
+  This license constitutes the full and exclusive agreement governing
+ the Modified Software, together with the Upstream Licenses.
+
+  8.2 Severability
+  If any provision of this license is found to be invalid or
+unenforceable, the remaining provisions shall remain in full effect.
+
+  8.3 Termination
+  Your rights under this license will automatically terminate if you fail
+ to comply with any term of this license or any Upstream License.
+ Termination of this license does not affect rights granted to you under
+ Upstream Licenses if you continue to comply with those terms.
+
+  8.4 Jurisdiction
+  This License shall be interpreted under principles of open-source
+licensing and educational fair use. Any disputes shall be resolved
+according to applicable international copyright standards.
+
+  8.5 No Endorsement or Affiliation
+  This fork and its maintainer are not affiliated with, endorsed by, or
+officially supported by the Original Author or xanasoft.com.
+
+             END OF LICENSE.Plus (MODIFIED FORK VERSION)              
+
+            How to Apply These Terms to Your Modified Version
+
+  If you modify this Modified Software and distribute your modifications,
+you must include this license document in its entirety with your
+distribution. You must also:
+
+  1. Include the following copyright notices in all source files:
+
+    /*
+     * Modified version of Sandboxie-Plus
+     * Copyright (c) 2025 moonqianqiu (Modifications)
+     * Copyright (c) 2020-2025 David Xanatos (Original Software)
+     *
+     * This modified version is licensed under the LICENSE.Plus (Modified
+     * Fork Version) which supplements the original Sandboxie-Plus
+     * licenses (GPLv3 and others).
+     *
+     * You should have received a copy of the LICENSE.Plus (Modified Fork
+     * Version) along with this program. If not, see:
+     * https://github.com/moonqianqiu/Sandboxie/blob/main/LICENSE.Plus
+     */
+
+  2. Include a prominent notice in your documentation and user interface
+     indicating that this is a modified fork of Sandboxie-Plus, and provide
+     clear attribution to both the Original Author and Fork Maintainer.
+
+  3. Ensure that all sub-component licenses are properly included and
+     respected in your distribution.
+
+  4. Make the complete source code of your modifications available to
+     anyone who receives a copy of the binary version, in accordance with
+     GPLv3 requirements.
+
+  For more information on open-source licensing compliance, please refer
+ to the GNU General Public License documentation at https://www.gnu.org/
+licenses/ and consult with legal professionals when necessary.
