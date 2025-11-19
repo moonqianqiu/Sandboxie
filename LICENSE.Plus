@@ -1,64 +1,151 @@
-Copyright 2020 - 2025 David Xanatos (xanasoft.com)
+Copyright (c) 2025 moonqianqiu (Modified Fork)
+Copyright (c) 2020 - 2025 David Xanatos (Original Code)
 
-Sandboxie-Plus can be used under the following restrictions and obligations:
+FORK NOTICE AND MODIFICATION CLAUSE
+=====================================
 
-   1. Whomever obtains a copy of the software is permitted
-      to use it in any noncommercial setting to the full
-      extent the software permits; however certain functionality
-      is only available with a support certificate which
-      can be obtained from xanasoft.com
+This is a modified fork of the original Sandboxie-Plus software originally developed by David Xanatos. The original repository can be found at: https://github.com/sandboxie-plus/Sandboxie
 
-   2. To use the software commercially a business certificate
-      must be obtained from xanasoft.com; however it is permitted to
-      use the software commercially for a limited period of time
-      on no more than 3 machines for evaluation purposes.
+IMPORTANT LEGAL DISCLAIMER
+=====================================
 
-   3. It is permitted to redistribute the original unmodified
-      binaries free of charge.
+THE SOFTWARE IN THIS REPOSITORY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+STRICTLY FOR EDUCATIONAL, RESEARCH, AND NON-COMMERCIAL USE
+=========================================================
 
-Usage of the source code:
+This modified software is intended strictly for:
+- Personal learning and educational purposes
+- Technical research and experimentation
+- Non-commercial academic exchange
 
-   1. Whomever obtains a copy of the source code is allowed to modify,
-      compile and redistribute the source code, as well as use the
-      compiled binaries for private, i.e. noncommercial use.
+PROHIBITED USES (CRITICAL)
+=============================
 
-   2. This copyright notice and this permission notice shall be
-      included in all copies or substantial portions of the Software.
+The following uses are STRICTLY PROHIBITED:
 
-   3. Public distribution of self-compiled binaries is only permitted
-      under the following conditions:
-        i) The entire source code with all modifications must be made
-           publicly available, such that all improvements may be back
-           ported to the official distribution.
-        ii) The software’s name may not be changed, and no authorship or
-           copyright information’s displayed by the software are
-           allowed to be removed.
-        iii) The original author of this software reserves the right to
-           prohibit any distribution of unofficial binaries on his own
-           discretion.
+1. COMMERCIAL USE
+   - Any profit-making activities
+   - Advertising or promotional use
+   - Embedding in paid products or services
+   - Selling or distributing for commercial gain
 
-   4. Using self-compiled binaries for commercial use is only permitted
-      when an appropriate commercial use certificate has been obtained.
+2. ILLEGAL USE
+   - Any activities violating laws and regulations
+   - Infringement on others' rights and interests
+   - Unauthorized distribution or modification
 
+3. UNAUTHORIZED DISTRIBUTION
+   - Distributing modified binaries without proper attribution
+   - Removing copyright notices or authorship information
+   - Claiming original authorship of the modified code
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+LEARNING AND RESEARCH LIMITATIONS
+==================================
 
+This modified software may have the following known limitations:
+- Incomplete functions or missing features
+- Compatibility risks with various systems
+- Potential bugs or stability issues
+- No guarantee of ongoing maintenance or updates
+- Limited documentation or support
 
-Further licensing information
-======================================
+USER RESPONSIBILITY AND LIABILITY WAIVER
+=========================================
 
-Sandboxie-Plus is made up of the following components, governed under various licenses:
-* SandMan is the primary Sandboxie-Plus UI component, provided under a custom license.
-* QSbieAPI is a standalone reimplementation of Sandboxie’s API using IPC mechanisms to communicate with Sandboxie’s core components, licensed under the LGPL.
-* Sandboxie core components, licensed under the GPL v3.
-* MiscHelpers is a generic Qt-based helper library, licensed under the LGPL.
-* The Qt Framework, is licensed under the LGPL.
-* UglobalHotkey is an extension for Qt framework, which implements global hotkeys functionality and is in the Public Domain.
-* QtSingleApp is a Qt Solutions component that provides support for applications that can be only started once per user, BSD-licensed.
+By using this software, users explicitly agree that:
+
+1. ANY ISSUES (including but not limited to data loss, system anomalies, security breaches, or any other problems) caused by using this software are the user's SOLE RESPONSIBILITY.
+
+2. The repository maintainers and contributors are NOT LIABLE for:
+   - Any legal disputes arising from software use
+   - Financial losses or damages
+   - System instability or crashes
+   - Data corruption or loss
+   - Security vulnerabilities
+
+3. Users must use this software at their own risk and discretion.
+
+ATTRIBUTION AND ORIGINAL AUTHOR SUPPORT
+========================================
+
+Users are STRONGLY RECOMMENDED to:
+
+1. Support the original author by:
+   - Visiting the original repository: https://github.com/sandboxie-plus/Sandboxie
+   - Giving stars, likes, or other recognition
+   - Making donations to support development
+   - Reporting issues directly to the original author
+
+2. For production environments, use the original software directly for:
+   - Better stability and reliability
+   - Proper support and maintenance
+   - Official updates and security patches
+
+3. When using this modified version, maintain proper attribution to:
+   - Original author: David Xanatos
+   - Original project: Sandboxie-Plus
+   - Original repository: https://github.com/sandboxie-plus/Sandboxie
+   - Fork maintainer: moonqianqiu
+
+DISTRIBUTION AND REDISTRIBUTION RULES
+=====================================
+
+If distributing this modified software:
+
+1. FULL SOURCE CODE DISCLOSURE
+   - Must provide complete source code including all modifications
+   - Must make all improvements publicly available
+   - Cannot distribute only binaries without source code
+
+2. PRESERVATION OF ATTRIBUTION
+   - Cannot change the software's name without clear "fork" designation
+   - Cannot remove original copyright or authorship notices
+   - Must maintain clear attribution to original author and project
+
+3. BACK-PORTING REQUIREMENT
+   - Improvements should be made available to original project
+   - Original author reserves right to prohibit unofficial distributions
+
+4. COMMERCIAL RESTRICTIONS
+   - Commercial distribution requires permission from original author
+   - Commercial use requires appropriate licensing from original author
+
+ORIGINAL LICENSE COMPONENTS
+===========================
+
+This software contains components under various licenses:
+
+* SandMan (Primary UI): Custom license as detailed above
+* QSbieAPI: LGPL license (standalone reimplementation)
+* Sandboxie core components: GPL v3.0
+* MiscHelpers: LGPL license (Qt-based helper library)
+* Qt Framework: LGPL license
+* UglobalHotkey: Public Domain
+* QtSingleApp: BSD license
+
+SOFTWARE COMPONENTS AND SUB-LICENSES
+=====================================
+
+When modifying, compiling, and redistributing this software:
+
+1. You must comply with all sub-licenses mentioned above
+2. You must include all required license notices and copyright statements
+3. You cannot remove or modify any attribution requirements from sub-components
+4. You must respect the terms of each component's individual license
+
+FINAL LEGAL PROTECTION
+======================
+
+This license serves as a comprehensive legal protection framework that:
+- Protects the fork maintainer from liability
+- Ensures proper attribution to original authors
+- Prevents commercial misuse of educational modifications
+- Maintains the spirit of open-source collaboration
+- Respects the intellectual property rights of original creators
+
+By using, modifying, or distributing this software, you acknowledge that you have read, understood, and agree to be bound by all terms and conditions outlined in this license.
+
+For any legal questions or commercial licensing inquiries regarding the original Sandboxie-Plus software, please contact the original author David Xanatos directly through the official channels.
+
+Last updated: November 19, 2025
