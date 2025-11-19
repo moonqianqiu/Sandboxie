@@ -1,5 +1,7 @@
 The modified version of the software in this repository is originally developed by **David Xanatos**, with the original repository link: https://github.com/sandboxie-plus/Sandboxie.  
 
+The modified version is governed under the educational and non-commercial license described in Sandboxie/LICENSE.Plus.
+
 This software is **strictly for personal learning, technical research, or non-commercial exchange only**. The following uses are prohibited:  
 - Commercial use (including but not limited to profit-making, advertising, embedding in paid products, etc.);  
 - Illegal use (such as infringing on others' rights and interests, acts violating laws and regulations);  
@@ -19,6 +21,8 @@ This software is modified for learning purposes and may have the following limit
 Thank you for the original author’s contributions!
 
 Модифицированная версия программного обеспечения в этом репозитории изначально разработана **Дэвидом Ксанатосом (David Xanatos)**, ссылка на оригинальный репозиторий: https://github.com/sandboxie-plus/Sandboxie.  
+
+Модифицированная версия распространяется в соответствии с образовательной и некоммерческой лицензией, описанной в файле Sandboxie/LICENSE.Plus.
 
 Данное ПО предназначено **исключительно для личного обучения, технических исследований или некоммерческого обмена**. Запрещено использование в следующих целях:  
 - Коммерческое использование (включая, но не ограничиваясь, получением прибыли, рекламой, встраиванием в платные продукты и т.д.);  
