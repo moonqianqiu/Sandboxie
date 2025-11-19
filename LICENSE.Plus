@@ -1,49 +1,168 @@
-Copyright (c) 2020 - 2025 David Xanatos (Original Author)​
-Copyright (c) 2025 moonqianqiu (Modified Fork Maintainer)​
+Copyright (c) 2025 moonqianqiu (Modified Fork Maintainer)
+Copyright (c) 2020 – 2025 David Xanatos (Original Author)
 1. Preamble
-This license governs the modified version of Sandboxie-Plus ("Modified Software") hosted at moonqianqiu/Sandboxie. The Modified Software is a derivative work of the original Sandboxie-Plus software ("Original Software") developed by David Xanatos, available at sandboxie-plus/Sandboxie.
-The Original Software is licensed under the terms of the original LICENSE.Plus(hereinafter "Original License") and includes components governed by additional sub-licenses (detailed in Section 8). This Modified License extends the Original License to address the specific modifications, distribution, and use of the Modified Software by the Fork Maintainer.
-2. No Warranty & Disclaimer of Liability
-2.1 AS IS Basis​
-The Modified Software is provided "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NONINFRINGEMENT. THE FORK MAINTAINER (moonqianqiu) AND ORIGINAL AUTHOR (David Xanatos) DISCLAIM ALL WARRANTIES, WHETHER ARISING FROM STATUTE, COMMON LAW, CUSTOM, OR OTHERWISE.
-2.2 No Liability for Modifications​
-The Fork Maintainer makes no representations or warranties regarding the quality, reliability, accuracy, or completeness of the modifications introduced to the Original Software. Any modifications, including but not limited to code changes, configuration adjustments, or feature additions, are provided without any commitment to support, maintain, or correct defects.
-2.3 User Assumes All Risk​
-BY USING, MODIFYING, OR DISTRIBUTING THE MODIFIED SOFTWARE, YOU ACKNOWLEDGE AND AGREE THAT:
-YOU ARE SOLELY RESPONSIBLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING FROM YOUR USE OR INABILITY TO USE THE SOFTWARE (INCLUDING, WITHOUT LIMITATION, DATA LOSS, SYSTEM CORRUPTION, SECURITY BREACHES, OR FINANCIAL LOSSES).
-THE FORK MAINTAINER AND ORIGINAL AUTHOR SHALL NOT BE LIABLE FOR ANY CLAIM, DEMAND, OR DAMAGES WHATSOEVER, INCLUDING BUT NOT LIMITED TO LEGAL DISPUTES, COSTS OF LITIGATION, OR LOSS OF PROFITS, ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF THE MODIFIED SOFTWARE.
-3. Strictly Permitted Uses
-The Modified Software is intended exclusively​ for the following purposes:
-Personal Learning & Education: Studying software design, debugging, or reverse engineering.
-Technical Research: Experimenting with sandboxing technologies or contributing to open-source knowledge.
-Non-Commercial Exchange: Sharing modifications or usage experiences in academic or community settings without financial consideration.
-4. Prohibited Uses
-ANY USE NOT EXPRESSLY PERMITTED IN SECTION 3 IS STRICTLY PROHIBITED, INCLUDING BUT NOT LIMITED TO:
-Commercial Use: Profit-making activities, embedding in paid products/services, advertising, or selling the Modified Software or its derivatives.
-Illegal or Malicious Use: Violating laws (e.g., cybercrime, hacking), infringing third-party rights (e.g., copyright, privacy), or developing tools for unauthorized access.
-Unauthorized Distribution: Distributing the Modified Software (in source or binary form) without:
-Full attribution to the Original Author and Fork Maintainer.
-Disclosure of all modifications made to the Original Software.
-Compliance with the terms in this License and the Original License.
-5. Modification & Redistribution Rules
-If you modify and/or redistribute the Modified Software:
-Preserve All Notices: Retain all copyright, license, and attribution notices from the Original Software and this Modified License.
-Disclose Modifications: Make the complete source code​ of your modified version publicly available (e.g., via a GitHub repository), including all changes, additions, or deletions.
-Back-Port Improvements: To the extent feasible, contribute significant improvements back to the Original Software repository to benefit the community.
-No Misrepresentation: Do not misrepresent the Modified Software as the Original Software, nor claim endorsement by the Original Author or Fork Maintainer.
-6. Sub-Component Licenses
-The Modified Software incorporates components governed by independent licenses (retained from the Original Software). You must comply with all such sub-licenses, including but not limited to:
-Sandboxie Core Components: GNU General Public License v3.0.
-QSbieAPI, MiscHelpers: Lesser General Public License v2.1 (LGPL).
-Qt Framework, UglobalHotkey, QtSingleApp: LGPL, Public Domain, or BSD licenses (as specified in the Original Software’s documentation).
-Failure to comply with sub-component licenses voids your rights under this Modified License.
-7. Recommendation to Support Original Authors
-While not legally binding, the Fork Maintainer strongly encourages you to:
-Star, fork, or contribute to the Original Repository (sandboxie-plus/Sandboxie).
-Report bugs or suggest features directly to the Original Author.
-Use the Original Software for production environments to ensure stability and access to official support.
-8. Final Provisions
-This License is the sole agreement governing your use of the Modified Software. By using, modifying, or distributing the software, you irrevocably agree to its terms.
-If any provision of this License is found invalid or unenforceable, the remaining provisions shall remain in full force and effect.
-Disputes arising under this License shall be resolved through binding arbitration in the Chechen Republic, Russia, unless otherwise required by applicable law.
-END OF LICENSE
+
+This document defines the terms for the modified version of the Sandboxie‑Plus software (“Modified Software”) maintained under the GitHub repository:
+
+    https://github.com/moonqianqiu/Sandboxie
+
+The Modified Software is a derivative work based on the original Sandboxie‑Plus software (“Original Software”) developed and copyrighted by David Xanatos, available at:
+
+    https://github.com/sandboxie-plus/Sandboxie
+
+This Modified License extends and supplements the original LICENSE.Plus and LICENSE.Classic (GPL v3) files of the Original Software.
+Nothing in this document shall be construed as limiting, modifying, or superseding the rights of the original author under those licenses.
+2. Purpose and Intent
+
+The Modified Software is created solely for educational, technical research, and non‑commercial study purposes.
+It exists to facilitate code learning, sandboxing mechanism analysis, and open‑source experimentation.
+It is not intended for production, distribution, or commercial use of any kind.
+3. No Warranty and Disclaimer of Liability
+
+    AS‑IS Distribution
+    The Modified Software is provided “AS IS”, without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, title, or non‑infringement.
+
+    No Responsibility for Modifications
+    The Fork Maintainer (moonqianqiu) provides the modifications without any guarantee of correctness, completeness, functionality, or safety.
+    All code changes, configurations, and related materials are offered purely for educational demonstration.
+
+    Full User Responsibility
+    By using or compiling this software, you agree that you alone assume all risks and responsibilities arising from such use, including but not limited to:
+
+        System instability, crashes, or data loss
+
+        Security vulnerabilities or software conflicts
+
+        Violation of third‑party rights or local laws
+
+        Any direct or indirect damages, including legal costs, financial loss, or consequential harm
+
+    The Fork Maintainer and Original Author shall under no circumstances be held liable for any claim, damage, or legal dispute related to this Modified Software.
+
+4. Permitted Uses
+
+The Modified Software may be used only for:
+
+    🧩 Personal learning and study of software structure or programming techniques
+
+    🔬 Academic or technical research in a non‑commercial context
+
+    🤝 Non‑commercial exchange of ideas or improvements within open‑source or research communities
+
+5. Prohibited Uses (Strict)
+
+The following actions are strictly prohibited:
+
+    Commercial Activities
+
+        Sale, licensing, or distribution for profit
+
+        Use in paid or monetized products or services
+
+        Advertising or promotional integration
+
+        Any other for‑profit exploitation
+
+    Illegal or Harmful Purposes
+
+        Use in violation of applicable laws or regulations
+
+        Infringement of copyright, privacy, or intellectual‑property rights
+
+        Creation or distribution of malicious, deceptive, or harmful derivatives
+
+    Unauthorized Distribution
+
+        Distribution of modified binaries without accompanying full source code
+
+        Removal or alteration of copyright or authorship notices
+
+        Misrepresentation of authorship or project origin
+
+        Use of the original software name without clear fork identification
+
+6. Modification and Redistribution Rules
+
+If you modify or redistribute this Modified Software, you must:
+
+    Preserve Attribution
+
+        Retain all original and modified license texts and copyright notices
+
+        Clearly acknowledge both the Original Author (David Xanatos) and the Fork Maintainer (moonqianqiu)
+
+    Disclose Source Code
+
+        Provide complete, publicly accessible source code including all modifications
+
+        Clearly document all changes or additions
+
+    Respect Naming Rules
+
+        Do not rename the software to mislead users into thinking it is the official version
+
+        Include the term “fork” or “modified” in any public release name
+
+    Comply with Upstream Terms
+
+        All redistribution remains subject to the original Sandboxie‑Plus license terms and sub‑component licenses
+
+    Allow Back‑Porting
+
+        Improvements or useful changes should, when possible, be made available to the upstream project to benefit the community
+
+    Commercial Restriction
+
+        Commercial use, distribution, or licensing remains subject to the Original Author’s approval and licensing policies
+
+7. Included Sub‑Licenses and Components
+
+This software contains components covered under the following licenses:
+Component	License
+Sandboxie Core	GNU General Public License v3.0
+SandMan (UI)	Custom License (Original Author)
+QSbieAPI	LGPL
+MiscHelpers	LGPL
+Qt Framework	LGPL
+UglobalHotkey	Public Domain
+QtSingleApp	BSD License
+
+All such licenses remain in full force and must accompany any redistributed copies of the software.
+Failure to comply with these component licenses automatically voids your rights to use or distribute the Modified Software.
+8. Recommendation and Attribution
+
+While not legally binding, users are strongly encouraged to:
+
+    ⭐ Star, fork, or contribute to the original Sandboxie‑Plus repository
+
+    🧑‍💻 Report bugs or feature ideas directly to the Original Author
+
+    💰 Support the developer through donations or official channels
+
+    🛠️ Use the official Sandboxie‑Plus builds for production environments
+
+Proper attribution must always include:
+
+    Original Author: David Xanatos
+    Original Repository: https://github.com/sandboxie-plus/Sandboxie
+    Fork Maintainer: moonqianqiu
+    Modified Repository: https://github.com/moonqianqiu/Sandboxie
+
+9. Final Legal Terms
+
+    Entire Agreement
+    This license constitutes the full and exclusive agreement governing the Modified Software.
+
+    Severability
+    If any provision is found invalid or unenforceable, the remaining provisions shall remain in full effect.
+
+    Jurisdiction
+    This License shall be interpreted under principles of open‑source licensing and educational fair use.
+    Any disputes shall be resolved according to applicable international copyright standards.
+
+    No Endorsement or Affiliation
+    This fork and its maintainer are not affiliated with, endorsed by, or officially supported by the Original Author or xanasoft.com.
+
+END OF LICENSE.Plus (Modified Fork Version)
+
+(Revision 2025.11 — Prepared for educational and non‑commercial use only.)
