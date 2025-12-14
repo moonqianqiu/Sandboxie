@@ -5,6 +5,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 
 
+## [1.16.9 / 5.71.9] - 2025-11-
+
+### Fixed
+- fixed incompatibility with thunderbird 146 
+
+
 
 ## [1.16.8 / 5.71.8] - 2025-11-24
 
@@ -24,13 +30,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - reverted default 'UseWin32kHooks=y' back to 'n' as it caused issues with other apps
-- improved named syscall invocation when using WoW64
+- FIXED SECURITY ISSUE ID-31 improved named syscall invocation when using WoW64 (thanks pentester.z)
 
 ### Fixed
 - fixed 'OpenWndStation=y' not working with 'SandboxieAllGroup=y'
-- fixed missing parameter validation in SbieIniServer
-- fixed issue with certificate parsing
-- fixed an issue retrieving driver info
+- FIXED SECURITY ISSUE ID-28 missing parameter validation in SbieIniServer (thanks DepthFirstDisclosures)
+- FIXED SECURITY ISSUE ID-29 issue with certificate parsing (thanks pentester.z)
+- FIXED SECURITY ISSUE ID-30 an issue retrieving driver info (thanks pentester.z)
 - fixed potential handle leak in SbieDll.dll related to SbieApi_DeviceHandle [#5097](https://github.com/sandboxie-plus/Sandboxie/issues/5097)
 
 
