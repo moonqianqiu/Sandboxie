@@ -76,6 +76,13 @@ mkdir %~dp0\Build_UGlobalHotkey_%build_arch%
 cd %~dp0\Build_UGlobalHotkey_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\UGlobalHotkey\uglobalhotkey.qc.pro %qt_params%
+//添加
+%~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 ^
+  release\ukeysequence.obj ^
+  release\uglobalhotkeys.obj ^
+  release\uexception.obj
+IF %ERRORLEVEL% NEQ 0 goto :error
+
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\UGlobalHotkey.dll goto :error
