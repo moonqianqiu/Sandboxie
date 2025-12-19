@@ -81,24 +81,24 @@ IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\UGlobalHotkey.dll goto :error
 
 
+REM 干净构建，避免旧 Makefile 污染
+if exist "%~dp0Build_UGlobalHotkey_%build_arch%" rmdir /s /q "%~dp0Build_UGlobalHotkey_%build_arch%"
 
 mkdir %~dp0\Build_qtsingleapp_%build_arch%
 cd %~dp0\Build_qtsingleapp_%build_arch%
 
 %qt_path%\bin\qmake.exe %~dp0\QtSingleApp\qtsingleapp\qtsingleapp\qtsingleapp.qc.pro %qt_params%
+
 REM EDIT Workaround: force-build objects first
 %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 ^
-  release\qtlocalpeer.obj ^
-  release\qtsingleapplication.obj ^
-  release\qtsinglecoreapplication.obj
+  release\moc_ukeysequence.obj ^
+  release\moc_uglobalhotkeys.obj ^
+  release\ukeysequence.obj ^
+  release\uglobalhotkeys.obj ^
+  release\uexception.obj
 IF %ERRORLEVEL% NEQ 0 goto :error
-%~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 ^
-  release\moc_qtlocalpeer.obj ^
-  release\moc_qtsingleapplication.obj ^
-  release\moc_qtsinglecoreapplication.obj
-IF %ERRORLEVEL% NEQ 0 goto :error
-REM %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1
-%~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
+%~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1
+REM %~dp0..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8
 IF %ERRORLEVEL% NEQ 0 goto :error
 if NOT EXIST %~dp0\bin\%build_arch%\Release\qtsingleapp.dll goto :error
 
