@@ -176,26 +176,26 @@ jobs:
           exit /b 0
 
       - name: Build Sandboxie-Plus x64
+        shell: cmd
         run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
 
       - name: Dump UGlobalHotkey Makefile evidence
-        if: failure()
+        if: always()
         shell: cmd
         run: |
           @echo on
+          if not exist SandboxiePlus\Build_UGlobalHotkey_x64\Makefile.Release (
+            echo Makefile.Release not found
+            exit /b 0
+          )
           cd SandboxiePlus\Build_UGlobalHotkey_x64
-          echo ==== list build dir ====
-          dir /a
-          echo ==== list release dir ====
-          dir /b release
           echo ==== find ukeysequence in Makefile.Release ====
-          findstr /n /i ukeysequence Makefile.Release || echo (no match)
-          echo ==== find OBJECTS line ====
+          findstr /n /i "ukeysequence" Makefile.Release || echo (no match)
+          echo ==== find SOURCES/OBJECTS ====
+          findstr /n /i "SOURCES" Makefile.Release || echo (no match)
           findstr /n /i "OBJECTS" Makefile.Release || echo (no match)
-          echo ==== show link response file line ====
-          findstr /n /i ".jom" Makefile.Release || echo (no match)
-          echo ==== show link target rule block (around line 140-170) ====
-          powershell -NoProfile -Command "Get-Content Makefile.Release | Select-Object -Skip 135 -First 41"
+          echo ==== show first 80 lines ====
+          powershell -NoProfile -Command "Get-Content Makefile.Release | Select-Object -First 80"
           exit /b 0
 
       - name: Diagnose build single object
@@ -203,12 +203,14 @@ jobs:
         shell: cmd
         run: |
           @echo on
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
           cd SandboxiePlus\Build_UGlobalHotkey_x64
           echo ==== build single object (ukeysequence) ====
-          D:\a\Sandboxie\Sandboxie\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 release\ukeysequence.obj
+          D:\a\Sandboxie\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 release\ukeysequence.obj
           echo ==== exitcode=%errorlevel% ====
           dir /b release
           exit /b 0
+
 
       - name: Build SbieShell x64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
