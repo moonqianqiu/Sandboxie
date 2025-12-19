@@ -193,6 +193,21 @@ jobs:
           findstr /n /i "OBJECTS" Makefile.Release || echo (no match)
           echo ==== show link response file line ====
           findstr /n /i ".jom" Makefile.Release || echo (no match)
+          echo ==== show link target rule block (around line 140-170) ====
+          powershell -NoProfile -Command "Get-Content Makefile.Release | Select-Object -Index 135..175"
+
+      - name: Diagnose build single object
+        if: failure()
+        shell: cmd
+        run: |
+          @echo on
+          cd SandboxiePlus\Build_UGlobalHotkey_x64
+          echo ==== try build ukeysequence.obj (single job) ====
+          D:\a\Sandboxie\Qt\6.8.3\msvc2022_64\bin\qmake.exe -query
+          D:\a\Sandboxie\Sandboxie\SandboxiePlus\..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 release\ukeysequence.obj
+          echo ==== list release dir after single obj build ====
+          dir /b release
+          exit /b 0
 
       - name: Build SbieShell x64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
