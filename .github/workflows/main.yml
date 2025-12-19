@@ -169,6 +169,23 @@ jobs:
       - name: Build Sandboxie-Plus x64
         run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
 
+      - name: Dump UGlobalHotkey Makefile evidence
+        if: failure()
+        shell: cmd
+        run: |
+          @echo on
+          cd SandboxiePlus\Build_UGlobalHotkey_x64
+          echo ==== list build dir ====
+          dir /a
+          echo ==== list release dir ====
+          dir /b release
+          echo ==== find ukeysequence in Makefile.Release ====
+          findstr /n /i ukeysequence Makefile.Release
+          echo ==== find OBJECTS line ====
+          findstr /n /i "OBJECTS" Makefile.Release
+          echo ==== show link response file line ====
+          findstr /n /i ".jom" Makefile.Release
+
       - name: Build SbieShell x64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
 
@@ -228,7 +245,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
