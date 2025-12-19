@@ -90,10 +90,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: recursive
+        uses: actions/checkout@v6
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
@@ -145,72 +142,9 @@ jobs:
     #
     # Compile Sandboxie Plus
     #
-      - name: Verify UGlobalHotkey sources exist
-        shell: cmd
-        run: |
-          @echo on
-          echo ==== list UGlobalHotkey dir ====
-          dir /b SandboxiePlus\UGlobalHotkey
-          echo ==== show sources pri ====
-          type SandboxiePlus\UGlobalHotkey\uglobalhotkey-sources.pri
-          echo ==== check ukeysequence.cpp exists ====
-          if not exist SandboxiePlus\UGlobalHotkey\ukeysequence.cpp (
-            echo MISSING ukeysequence.cpp
-            exit /b 1
-          )    
-
-      - name: Clean Qt build dirs
-        shell: cmd
-        run: |
-          @echo on
-          if exist SandboxiePlus\Build_UGlobalHotkey_x64 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_x64
-          if exist SandboxiePlus\Build_UGlobalHotkey_Win32 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_Win32
-          exit /b 0
- 
-      - name: Clean qmake stash (important)
-        shell: cmd
-        run: |
-          @echo on
-          if exist SandboxiePlus\UGlobalHotkey\.qmake.stash del /f /q SandboxiePlus\UGlobalHotkey\.qmake.stash
-          if exist SandboxiePlus\Build_UGlobalHotkey_x64\.qmake.stash del /f /q SandboxiePlus\Build_UGlobalHotkey_x64\.qmake.stash
-          exit /b 0
 
       - name: Build Sandboxie-Plus x64
-        shell: cmd
         run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
-
-      - name: Dump UGlobalHotkey Makefile evidence
-        if: always()
-        shell: cmd
-        run: |
-          @echo on
-          if not exist SandboxiePlus\Build_UGlobalHotkey_x64\Makefile.Release (
-            echo Makefile.Release not found
-            exit /b 0
-          )
-          cd SandboxiePlus\Build_UGlobalHotkey_x64
-          echo ==== find ukeysequence in Makefile.Release ====
-          findstr /n /i "ukeysequence" Makefile.Release || echo (no match)
-          echo ==== find SOURCES/OBJECTS ====
-          findstr /n /i "SOURCES" Makefile.Release || echo (no match)
-          findstr /n /i "OBJECTS" Makefile.Release || echo (no match)
-          echo ==== show first 80 lines ====
-          powershell -NoProfile -Command "Get-Content Makefile.Release | Select-Object -First 80"
-          exit /b 0
-
-      - name: Diagnose build single object
-        if: failure()
-        shell: cmd
-        run: |
-          @echo on
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          cd SandboxiePlus\Build_UGlobalHotkey_x64
-          echo ==== build single object (ukeysequence) ====
-          D:\a\Sandboxie\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 release\ukeysequence.obj
-          echo ==== exitcode=%errorlevel% ====
-          dir /b release
-          exit /b 0
-
 
       - name: Build SbieShell x64
         run: msbuild /t:restore,build -p:RestorePackagesConfig=true SandboxiePlus\SbieShell\SbieShell.sln /p:Configuration="Release" /p:Platform=x64
@@ -271,10 +205,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: recursive        
+        uses: actions/checkout@v6
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
