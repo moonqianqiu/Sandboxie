@@ -165,6 +165,13 @@ jobs:
           @echo on
           if exist SandboxiePlus\Build_UGlobalHotkey_x64 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_x64
           if exist SandboxiePlus\Build_UGlobalHotkey_Win32 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_Win32
+ 
+      - name: Clean qmake stash (important)
+        shell: cmd
+        run: |
+          @echo on
+          del /f /q SandboxiePlus\UGlobalHotkey\.qmake.stash 2>NUL
+          del /f /q SandboxiePlus\Build_UGlobalHotkey_x64\.qmake.stash 2>NUL
 
       - name: Build Sandboxie-Plus x64
         run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
