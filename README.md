@@ -60,7 +60,7 @@ Sandboxie is a sandbox-based isolation software for Windows NT-based operating s
 
 Sandboxie allows you to create virtually unlimited sandboxes and run them alone or simultaneously to isolate programs from the host and each other, while also allowing you to run as many programs simultaneously in a single box as you wish.
 
-**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](./README.md#-project-history) and [#2926](https://github.com/sandboxie-plus/Sandboxie/issues/2926)).**
+**Note: This is a community fork that took place after the release of the Sandboxie source code and not the official continuation of the previous development (see the [project history](#project-history) and [#2926](https://github.com/sandboxie-plus/Sandboxie/issues/2926)).**
 
 ## ⏬ Download
 
@@ -132,7 +132,7 @@ Sandboxie's functionality can be enhanced with specialized tools like the follow
   * [Sbiextra](https://github.com/sandboxie-plus/sbiextra) - adds additional user mode restrictions to sandboxed processes
   * [WrapLocale](https://github.com/UserUnknownFactor/WrapLocale) - provide more flexible locale pretending options than native LangId feature
 
-
+<a id="project-history"></a>
 ## 📌 Project history
 
 |      Timeline       |    Maintainer    |
@@ -220,6 +220,7 @@ If you find Sandboxie useful, then feel free to contribute through our [Contribu
 - isaak654, DerivativeOfLog7 - Italian
 - takahiro-itou, lllIIIlll - Japanese
 - VenusGirl - Korean
+- divinity76 - Norwegian Bokmål
 - 7zip, AndrzejRafalowski - Polish ([provided separately](https://forum.xanasoft.com/threads/polish-translation.4/page-2))
 - JNylson - Portuguese and Brazilian Portuguese
 - lufog, marat2509 - Russian
