@@ -174,31 +174,10 @@ jobs:
           if exist SandboxiePlus\UGlobalHotkey\.qmake.stash del /f /q SandboxiePlus\UGlobalHotkey\.qmake.stash
           if exist SandboxiePlus\Build_UGlobalHotkey_x64\.qmake.stash del /f /q SandboxiePlus\Build_UGlobalHotkey_x64\.qmake.stash
           exit /b 0
-          
-      - name: Build UGlobalHotkey objects first (workaround)
-        shell: cmd
-        run: |
-          @echo on
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          cd /d SandboxiePlus\Build_UGlobalHotkey_x64
-          D:\a\Sandboxie\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 8 ^
-            release\ukeysequence.obj ^
-            release\uglobalhotkeys.obj ^
-            release\uexception.obj ^
-            release\moc_ukeysequence.obj ^
-            release\moc_uglobalhotkeys.obj
-          dir /b release
 
       - name: Build Sandboxie-Plus x64
         shell: cmd
-        run: |
-          @echo on
-          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-          call SandboxiePlus\qmake_plus.cmd x64 build_qt6
-
-      # - name: Build Sandboxie-Plus x64
-      #   shell: cmd
-      #   run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
+        run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
 
       - name: Dump UGlobalHotkey Makefile evidence
         if: always()
