@@ -165,6 +165,7 @@ jobs:
           @echo on
           if exist SandboxiePlus\Build_UGlobalHotkey_x64 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_x64
           if exist SandboxiePlus\Build_UGlobalHotkey_Win32 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_Win32
+          exit /b 0
  
       - name: Clean qmake stash (important)
         shell: cmd
@@ -194,7 +195,8 @@ jobs:
           echo ==== show link response file line ====
           findstr /n /i ".jom" Makefile.Release || echo (no match)
           echo ==== show link target rule block (around line 140-170) ====
-          powershell -NoProfile -Command "Get-Content Makefile.Release | Select-Object -Index 135..175"
+          powershell -NoProfile -Command "Get-Content Makefile.Release | Select-Object -Skip 135 -First 41"
+          exit /b 0
 
       - name: Diagnose build single object
         if: failure()
@@ -202,10 +204,9 @@ jobs:
         run: |
           @echo on
           cd SandboxiePlus\Build_UGlobalHotkey_x64
-          echo ==== try build ukeysequence.obj (single job) ====
-          D:\a\Sandboxie\Qt\6.8.3\msvc2022_64\bin\qmake.exe -query
-          D:\a\Sandboxie\Sandboxie\SandboxiePlus\..\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 release\ukeysequence.obj
-          echo ==== list release dir after single obj build ====
+          echo ==== build single object (ukeysequence) ====
+          D:\a\Sandboxie\Sandboxie\..\Qt\Tools\QtCreator\bin\jom.exe -f Makefile.Release -j 1 release\ukeysequence.obj
+          echo ==== exitcode=%errorlevel% ====
           dir /b release
           exit /b 0
 
