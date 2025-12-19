@@ -90,7 +90,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
@@ -155,6 +158,13 @@ jobs:
             echo MISSING ukeysequence.cpp
             exit /b 1
           )    
+
+      - name: Clean Qt build dirs
+        shell: cmd
+        run: |
+          @echo on
+          if exist SandboxiePlus\Build_UGlobalHotkey_x64 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_x64
+          if exist SandboxiePlus\Build_UGlobalHotkey_Win32 rmdir /s /q SandboxiePlus\Build_UGlobalHotkey_Win32
 
       - name: Build Sandboxie-Plus x64
         run: SandboxiePlus\qmake_plus.cmd x64 build_qt6
