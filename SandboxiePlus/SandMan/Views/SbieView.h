@@ -54,7 +54,6 @@ public:
 	void						OnDoubleClicked(const CSandBoxPtr &pBox);
 
 	virtual QString				AddNewBox(bool bAlowTemp = false);
-	virtual QString				ImportSandbox();
 	virtual QString				AddNewGroup();
 	virtual bool				TestNameAndWarn(const QString& Name);
 	virtual void				SelectBox(const QString& Name);
@@ -83,6 +82,7 @@ private slots:
 	void						OnToolTipCallback(const QVariant& ID, QString& ToolTip);
 
 	void						OnCustomSortByColumn(int column);
+	void                        OnHeaderChange();
 
 	void						OnDoubleClicked(const QModelIndex& index);
 	void						OnClicked(const QModelIndex& index);

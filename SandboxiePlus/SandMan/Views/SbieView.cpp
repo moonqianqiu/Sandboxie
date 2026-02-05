@@ -19,6 +19,7 @@
 #include "../Windows/SettingsWindow.h"
 #include "../Windows/CompressDialog.h"
 #include "../Windows/ExtractDialog.h"
+#include "../BoxTransfer.h"
 
 #include "qt_windows.h"
 #include "qwindowdefs_win.h"
@@ -48,6 +49,15 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	m_pSbieTree->setExpandsOnDoubleClick(false);
 	//m_pSbieTree->setItemDelegate(theGUI->GetItemDelegate());
 
+	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
+	if (Columns.isEmpty()) {
+		m_pSbieTree->setColumnWidth(0, 300);
+		m_pSbieTree->setColumnWidth(1, 70);
+		m_pSbieTree->setColumnWidth(2, 70);
+		m_pSbieTree->setColumnWidth(3, 70);
+	} else
+		m_pSbieTree->restoreState(Columns);
+
 	m_pSbieTree->setModel(m_pSortProxy);
 
 	int iViewMode = theConf->GetInt("Options/ViewMode", 1);
@@ -66,8 +76,12 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	//m_pSbieTree->setSortingEnabled(false);
 	//m_pSbieTree->header()->setSortIndicatorShown(true);
 	//m_pSbieTree->header()->setSectionsClickable(true);
-	if(iViewMode != 2)
+	if (iViewMode != 2) {
 		connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnCustomSortByColumn(int)));
+		connect(m_pSbieTree->header(), SIGNAL(sectionClicked(int)), this, SLOT(OnHeaderChange()));
+		connect(m_pSbieTree->header(), SIGNAL(sectionMoved(int, int, int)), this, SLOT(OnHeaderChange()));
+		connect(m_pSbieTree->header(), SIGNAL(sectionResized(int, int, int)), this, SLOT(OnHeaderChange()));
+	}
 
 	QStyle* pStyle = QStyleFactory::create("windows");
 	m_pSbieTree->setStyle(pStyle);
@@ -116,14 +130,6 @@ CSbieView::CSbieView(QWidget* parent) : CPanelView(parent)
 	CreateGroupMenu();
 	CreateTrayMenu();
 
-	QByteArray Columns = theConf->GetBlob("MainWindow/BoxTree_Columns");
-	if (Columns.isEmpty()) {
-		m_pSbieTree->setColumnWidth(0, 300);
-		m_pSbieTree->setColumnWidth(1, 70);
-		m_pSbieTree->setColumnWidth(2, 70);
-		m_pSbieTree->setColumnWidth(3, 70);
-	} else
-		m_pSbieTree->restoreState(Columns);
 	if (theConf->GetBool("MainWindow/BoxTree_UseOrder", false) || iViewMode == 2)
 		SetCustomOrder();
 
@@ -156,7 +162,7 @@ void CSbieView::CreateMenu()
 {
 	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
-	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnGroupAction()));
+	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Boxes"), this, SLOT(OnGroupAction()));
 	m_pImportBox->setEnabled(CArchive::IsInit());
 
 
@@ -247,9 +253,10 @@ void CSbieView::CreateMenu()
 		m_pMenuTools->addSeparator();
 		m_pMenuDuplicate = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box Config"), this, SLOT(OnSandBoxAction()));
 		m_pMenuDuplicateEx = m_pMenuTools->addAction(CSandMan::GetIcon("Duplicate"), tr("Duplicate Box with Content"), this, SLOT(OnSandBoxAction()));
-		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Box"), this, SLOT(OnSandBoxAction()));
+		m_pMenuExport = m_pMenuTools->addAction(CSandMan::GetIcon("PackBox"), tr("Export Boxes"), this, SLOT(OnSandBoxAction()));
 		m_pMenuExport->setEnabled(CArchive::IsInit());
-
+	
+	m_pMenuBox->addSeparator();
 	m_pMenuRename = m_pMenuBox->addAction(CSandMan::GetIcon("Rename"), tr("Rename Sandbox"), this, SLOT(OnSandBoxAction()));
 	m_pMenuMoveTo = m_pMenuBox->addMenu(CSandMan::GetIcon("Group"), tr("Move Sandbox"));
 		m_pMenuMoveUp = m_pMenuMoveTo->addAction(CSandMan::GetIcon("Up"), tr("Move Up"), this, SLOT(OnGroupAction()));
@@ -326,7 +333,7 @@ void CSbieView::CreateOldMenu()
 {
 	m_pNewBox = m_pMenu->addAction(CSandMan::GetIcon("NewBox"), tr("Create New Box"), this, SLOT(OnGroupAction()));
 	m_pAddGroupe = m_pMenu->addAction(CSandMan::GetIcon("Group"), tr("Create Box Group"), this, SLOT(OnGroupAction()));
-	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Box"), this, SLOT(OnGroupAction()));
+	m_pImportBox = m_pMenu->addAction(CSandMan::GetIcon("UnPackBox"), tr("Import Boxes"), this, SLOT(OnGroupAction()));
 	m_pImportBox->setEnabled(CArchive::IsInit());
 	
 
@@ -616,9 +623,10 @@ void CSbieView::OnCustomSortByColumn(int column)
 		if (m_pSortProxy->sortRole() == Qt::InitialSortOrderRole) {
 			m_pSortProxy->sort(0, Qt::AscendingOrder);
 			m_pSortProxy->setSortRole(Qt::EditRole);
-			theConf->SetValue("MainWindow/BoxTree_UseOrder", false);
+			m_pSbieTree->header()->setSortIndicator(0, Qt::AscendingOrder);
 			m_pSbieTree->header()->setSortIndicatorShown(true);
-		} else if (order == Qt::DescendingOrder) {
+			theConf->SetValue("MainWindow/BoxTree_UseOrder", false);
+		} else if (order == Qt::AscendingOrder) {
 			SetCustomOrder();
 			theConf->SetValue("MainWindow/BoxTree_UseOrder", true);
 		}
@@ -626,7 +634,13 @@ void CSbieView::OnCustomSortByColumn(int column)
 	else {
 		m_pSortProxy->setSortRole(Qt::EditRole);
 		m_pSbieTree->header()->setSortIndicatorShown(true);
+		theConf->SetValue("MainWindow/BoxTree_UseOrder", false);
 	}
+}
+
+void CSbieView::OnHeaderChange()
+{
+	SaveState();
 }
 
 bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBoxeCount, bool bBoxBusy, bool bBoxNotMounted)
@@ -668,7 +682,12 @@ bool CSbieView::UpdateMenu(bool bAdvanced, const CSandBoxPtr &pBox, int iSandBox
 		iSandBoxeCount = 0;
 
 	m_pMenuMkLink->setEnabled(iSandBoxeCount == 1);
-	m_pMenuTools->setEnabled(iSandBoxeCount == 1);
+
+	//m_pMenuTools->setEnabled(iSandBoxeCount == 1)
+	m_pMenuBrowseNT->setEnabled(iSandBoxeCount == 1);
+	m_pMenuDuplicate->setEnabled(iSandBoxeCount == 1);
+	m_pMenuDuplicateEx->setEnabled(iSandBoxeCount == 1);
+
 	m_pMenuUnmount->setVisible(pBoxEx && pBoxEx->UseImageFile() && !pBoxEx->GetMountRoot().isEmpty());
 	m_pMenuRecover->setEnabled(iSandBoxeCount == 1);
 	m_pMenuCleanUp->setEnabled(iSandBoxeCount > 0);
@@ -1005,19 +1024,34 @@ void CSbieView::OnGroupAction()
 
 void CSbieView::OnGroupAction(QAction* Action)
 {
-	if (Action == m_pNewBox || Action == m_pAddGroupe || Action == m_pImportBox)
+	if (Action == m_pNewBox || Action == m_pAddGroupe)
 	{
-		QStringList List = GetSelectedGroups();
-
-		QString Name = Action == m_pNewBox ? AddNewBox() : (Action == m_pImportBox ? ImportSandbox() : AddNewGroup());
+		QString Name = Action == m_pNewBox ? AddNewBox() : AddNewGroup();
 		if (Name.isEmpty())
 			return;
 
+		QStringList List = GetSelectedGroups();
 		if (List.isEmpty())
 			return;
 		m_Groups[""].removeAll(Name);
 		m_Groups[List.first()].removeAll(Name);
 		m_Groups[List.first()].append(Name);
+	}
+	else if (Action == m_pImportBox)
+	{
+		QStringList BoxNames = ImportMultiBoxes(theGUI);
+		if (BoxNames.isEmpty())
+			return;
+
+		QStringList List = GetSelectedGroups();
+		if (List.isEmpty())
+			return;
+		foreach(const QString& Name, BoxNames)
+		{
+			m_Groups[""].removeAll(Name);
+			m_Groups[List.first()].removeAll(Name);
+			m_Groups[List.first()].append(Name);
+		}
 	}
 	else if (Action == m_pRenGroupe)
 	{
@@ -1200,89 +1234,6 @@ QString CSbieView::AddNewBox(bool bAlowTemp)
 		SelectBox(BoxName);
 	}
 	return BoxName;
-}
-
-QString CSbieView::ImportSandbox()
-{
-	QString Path = QFileDialog::getOpenFileName(this, tr("Select file name"), "", tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
-	if (Path.isEmpty())
-		return "";
-
-	QString Password;
-	quint64 ImageSize = 0;
-	
-	CArchive Archive(Path);
-	int Ret = Archive.Open();
-	if (Ret == ERR_7Z_PASSWORD_REQUIRED) {
-		for (;;) {
-			CBoxImageWindow window(CBoxImageWindow::eImport, this);
-			if (!theGUI->SafeExec(&window) == 1)
-				return "";
-			Archive.SetPassword(window.GetPassword());
-			Ret = Archive.Open();
-			if (Ret != ERR_7Z_OK) {
-				QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to open archive, wrong password?"));
-				continue;
-			}
-			Password = window.GetPassword();
-			ImageSize = window.GetImageSize();
-			break;
-		}
-	}
-	if (Ret != ERR_7Z_OK) {
-		QMessageBox::critical(this, "Sandboxie-Plus", tr("Failed to open archive (%1)!").arg(Ret));
-		return "";
-	}
-	Archive.Close();
-
-	StrPair PathName = Split2(Path, "/", true);
-	StrPair NameEx = Split2(PathName.second, ".", true);
-	QString Name = NameEx.first;
-	
-	CExtractDialog optWnd(Name, this);
-	if(!Password.isEmpty())
-		optWnd.ShowNoCrypt();
-	if (!theGUI->SafeExec(&optWnd) == 1)
-		return "";
-	Name = optWnd.GetName();
-	QString BoxRoot = optWnd.GetRoot();
-
-	CSandBoxPtr pBox;
-	SB_PROGRESS Status = theAPI->CreateBox(Name);
-	if (!Status.IsError()) {
-		pBox = theAPI->GetBoxByName(Name);
-		if (pBox) {
-
-			auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-
-			if (!BoxRoot.isEmpty())
-				pBox->SetFileRoot(BoxRoot);
-
-			if (!Password.isEmpty() && !optWnd.IsNoCrypt()) {
-				Status = pBoxEx->ImBoxCreate(ImageSize / 1024, Password);
-				if (!Status.IsError())
-					Status = pBoxEx->ImBoxMount(Password, true, true);
-			}
-
-			if (!Status.IsError())
-				Status = pBoxEx->ImportBox(Path, Password);
-
-			// always overwrite restored FileRootPath
-			pBox->SetText("FileRootPath", BoxRoot);
-		}
-	}
-
-	if (Status.GetStatus() == OP_ASYNC) {
-		Status = theGUI->AddAsyncOp(Status.GetValue(), true, tr("Importing: %1").arg(Path));
-		if (Status.IsError()) {
-			theGUI->DeleteBoxContent(pBox, CSandMan::eForDelete);
-			pBox->RemoveBox();
-		}
-	}
-	else
-		theGUI->CheckResults(QList<SB_STATUS>() << Status, this);
-
-	return Name;
 }
 
 QString CSbieView::AddNewGroup()
@@ -1584,32 +1535,7 @@ void CSbieView::OnSandBoxAction(QAction* Action, const QList<CSandBoxPtr>& SandB
 	}
 	else if (Action == m_pMenuExport)
 	{
-		CSandBoxPtr pBox = SandBoxes.first();
-		auto pBoxEx = pBox.objectCast<CSandBoxPlus>();
-
-		CCompressDialog optWnd(this);
-		if (pBoxEx->UseImageFile())
-			optWnd.SetMustEncrypt();
-		if (!theGUI->SafeExec(&optWnd) == 1)
-			return;
-
-		QString Password;
-		if (optWnd.UseEncryption()) {
-			CBoxImageWindow pwWnd(CBoxImageWindow::eExport, this);
-			if (!theGUI->SafeExec(&pwWnd) == 1)
-				return;
-			Password = pwWnd.GetPassword();
-		}
-
-		QString Path = QFileDialog::getSaveFileName(this, tr("Select file name"), SandBoxes.first()->GetName() + optWnd.GetFormat(), tr("7-Zip Archive (*.7z);;Zip Archive (*.zip)"));
-		if (Path.isEmpty())
-			return;
-
-		SB_PROGRESS Status = pBoxEx->ExportBox(Path, Password, optWnd.GetLevel(), optWnd.MakeSolid());
-		if (Status.GetStatus() == OP_ASYNC)
-			theGUI->AddAsyncOp(Status.GetValue(), false, tr("Exporting: %1").arg(Path));
-		else
-			Results.append(Status);
+		ExportMultiBoxes(this, SandBoxes);
 	}
 	else if (Action == m_pMenuRename)
 	{
@@ -2425,14 +2351,22 @@ void CSbieView::ReloadUserConfig()
 
 	UpdateMoveMenu();
 
-	//QMap<QString, QStringList> Collapsed = theAPI->GetUserSettings()->GetTextMap("CollapsedBoxes");
-	//m_Collapsed = ListToSet(Collapsed[""]);
-	//if (m_Collapsed.isEmpty()) { // try legacy entries
+	int Handling = theConf->GetInt("Options/BoxGroupHandling", 0);
+	if(Handling == 2)
+		m_Collapsed = ListToSet(m_Groups.keys());
+	else if(Handling == 1)
+		m_Collapsed.clear();
+	else if (Handling == 0)
+	{
+		//QMap<QString, QStringList> Collapsed = theAPI->GetUserSettings()->GetTextMap("CollapsedBoxes");
+		//m_Collapsed = ListToSet(Collapsed[""]);
+		//if (m_Collapsed.isEmpty()) { // try legacy entries
 		QString Collapsed = theConf->GetString("UIConfig/BoxCollapsedView");
 		//if (Collapsed.isEmpty())
 		//	Collapsed = theAPI->GetUserSettings()->GetText("BoxCollapsedView");
-		m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
-	//}
+			m_Collapsed = ListToSet(SplitStr(Collapsed, ","));
+		//}
+	}
 
 	ClearUserUIConfig();
 }
