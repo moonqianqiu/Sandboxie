@@ -1267,7 +1267,7 @@ _FX NTSTATUS Thread_Api_OpenProcess(PROCESS *proc, ULONG64 *parms)
         // the same sandbox.
         //
 
-        DesiredAccess = PROCESS_ALL_ACCESS;
+        DesiredAccess = PROCESS_QUERY_INFORMATION;
 
     } else {
 
