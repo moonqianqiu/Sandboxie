@@ -1678,6 +1678,12 @@ finish:
         hook NtQueryInformationProcess if env var SBIE_OVERRIDE_PARENT_PID exists
     }*/
 
+    {
+        WCHAR msg[1024];
+        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
+        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
+    }
+
     //
     // free work areas and return
     //
@@ -1699,12 +1705,6 @@ finish:
     if (TlsData->proc_command_line) {
         Dll_Free(TlsData->proc_command_line);
         TlsData->proc_command_line = NULL;
-    }
-
-    {
-        WCHAR msg[1024];
-        Sbie_snwprintf(msg, 1024, L"CreateProcess: %s (%s); err=%d", lpApplicationName ? lpApplicationName : L"[noName]", lpCommandLine ? lpCommandLine : L"[noCmd]", ok ? 0 : err);
-        SbieApi_MonitorPutMsg(MONITOR_OTHER | MONITOR_TRACE, msg);
     }
 
     SetLastError(err);
@@ -2785,7 +2785,7 @@ _FX BOOLEAN Proc_IsSoftwareUpdateW(const WCHAR *path)
     //
     //    for (WCHAR** MatchDir = MatchDirs; (*MatchDir)[0] != L'\0'; MatchDir++) {
     //
-    //        if (wcsstr(path2, *MatchDir)) {
+    //        if (wcsistr(path2, *MatchDir)) {
     //
     //            IsUpdate = TRUE;
     //            break;
@@ -3098,6 +3098,39 @@ _FX NTSTATUS Proc_NtQueryInformationProcess(
             WCHAR *TruePath, *CopyPath;
             if (NT_SUCCESS(File_GetName(NULL, (UNICODE_STRING*)ProcessInformation, &TruePath, &CopyPath, NULL)))
                 RtlInitUnicodeString((UNICODE_STRING*)ProcessInformation, TruePath);    // return non-sandboxed path so caller can't tell he's sandboxed.
+        }
+    }
+    else if ((ProcessInformationClass == ProcessImageFileNameWin32) && (NT_SUCCESS(status))) {
+        if (ProcessInformation) {
+            UNICODE_STRING *ImageName = (UNICODE_STRING*)ProcessInformation;
+            ULONG nameLen = ImageName->Length / sizeof(WCHAR);
+
+            if (Dll_BoxFileDosPath && Dll_BoxFileDosPathLen
+                && ImageName->Buffer
+                && nameLen >= Dll_BoxFileDosPathLen
+                && _wcsnicmp(ImageName->Buffer, Dll_BoxFileDosPath, Dll_BoxFileDosPathLen) == 0)
+            {
+                WCHAR *BoxedPath = Dll_AllocTemp((nameLen + 1) * sizeof(WCHAR));
+                if (BoxedPath) {
+                    WCHAR *TruePath;
+
+                    wmemcpy(BoxedPath, ImageName->Buffer, nameLen);
+                    BoxedPath[nameLen] = L'\0';
+
+                    TruePath = File_GetTruePathForBoxedPath(BoxedPath, TRUE);
+                    if (TruePath) {
+                        ULONG trueLen = wcslen(TruePath);
+                        THREAD_DATA *TlsData = Dll_GetTlsData(NULL);
+                        WCHAR *ImagePath = Dll_GetTlsNameBuffer(
+                            TlsData, TRUE_NAME_BUFFER, (trueLen + 1) * sizeof(WCHAR));
+                        wmemcpy(ImagePath, TruePath, trueLen + 1);
+                        RtlInitUnicodeString(ImageName, ImagePath);
+                        Dll_Free(TruePath);
+                    }
+
+                    Dll_Free(BoxedPath);
+                }
+            }
         }
     }
 
