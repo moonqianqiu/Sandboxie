@@ -8,6 +8,8 @@
 #include "../../MiscHelpers/Common/SortFilterProxyModel.h"
 #include "StackView.h"
 
+class QToolButton;
+
 
 class CTraceTree : public CPanelView
 {
@@ -94,7 +96,11 @@ private slots:
 	void				SaveToFile();
 
 protected:
+	bool				eventFilter(QObject* source, QEvent* event) override;
 	void				timerEvent(QTimerEvent* pEvent);
+	bool				IsTraceAtBottom() const;
+	void				PositionAutoScrollIndicator();
+	void				UpdateAutoScrollIndicator();
 	int					m_uTimerID;
 
 	static void			SaveToFileAsync(const CSbieProgressPtr& pProgress, QVector<CTraceEntryPtr> ResourceLog, QIODevice* pFile);
@@ -135,6 +141,7 @@ protected:
 	QComboBox*			m_pTraceStatus;
 	QAction*			m_pAllBoxes;
 	QAction*			m_pShowStack;
+	QToolButton*		m_pResumeAutoScroll;
 	QAction*			m_pSaveToFile;
 
 	QWidget*			m_pView;
@@ -152,10 +159,14 @@ class CTraceWindow : public QDialog
 public:
 	CTraceWindow(QWidget *parent = Q_NULLPTR);
 	~CTraceWindow();
+	void		CloseWithoutPrompt();
 
 signals:
 	void		Closed();
 
 protected:
 	void		closeEvent(QCloseEvent *e);
+
+private:
+	bool		m_bPromptOnClose;
 };
