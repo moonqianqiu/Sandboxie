@@ -254,7 +254,7 @@ CleanupExit:
     if (signAlgHandle)
         BCryptCloseAlgorithmProvider(signAlgHandle, 0);
 
-    return STATUS_SUCCESS;
+    return status;
 }
 
 NTSTATUS KphVerifyFile(
@@ -283,7 +283,7 @@ CleanupExit:
     if (hash)
         ExFreePoolWithTag(hash, 'vhpK');
  
-    return STATUS_SUCCESS;
+    return status;
 }
 
 NTSTATUS KphVerifyBuffer(
@@ -322,7 +322,7 @@ CleanupExit:
  
     MyFreeHash(&hashObj);
 
-    return STATUS_SUCCESS;
+    return status;
 }
 
 NTSTATUS KphReadSignature(    
@@ -384,7 +384,7 @@ CleanupExit:
     if (fileHandle)
         ZwClose(fileHandle);
     
-    return STATUS_SUCCESS;
+    return status;
 }
 
 NTSTATUS KphVerifyCurrentProcess()

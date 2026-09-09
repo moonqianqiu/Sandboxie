@@ -98,6 +98,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
+      - name: Verify local bypass patches
+        shell: pwsh
+        run: |
+          ./tools/check_local_patches.ps1
+
       - name: Load Variables from buildVariables.cmd
         shell: cmd
         run: |

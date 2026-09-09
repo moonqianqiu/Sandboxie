@@ -93,6 +93,12 @@ quint64 COnlineUpdater::GetRandID()
 
 SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, const QVariantMap& Params)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(receiver);
+	Q_UNUSED(member);
+	Q_UNUSED(Params);
+	return SB_PROGRESS(SB_ERR(SB_OtherError, QVariantList() << tr("Online updates are disabled in this build.")));
+#else
 	QUrlQuery Query;
 	Query.addQueryItem("action", "update");
 	Query.addQueryItem("software", "sandboxie-plus");
@@ -149,6 +155,7 @@ SB_PROGRESS COnlineUpdater::GetUpdates(QObject* receiver, const char* member, co
 	StartJob(pJob, Url);
 	QObject::connect(pJob, SIGNAL(UpdateData(const QVariantMap&, const QVariantMap&)), receiver, member, Qt::QueuedConnection);
 	return SB_PROGRESS(OP_ASYNC, pJob->m_pProgress);
+#endif
 }
 
 void CGetUpdatesJob::Finish(QNetworkReply* pReply)
@@ -311,6 +318,13 @@ void CGetFileJob::Finish(QNetworkReply* pReply)
 
 SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* receiver, const char* member, const QVariantMap& Params)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(Serial);
+	Q_UNUSED(receiver);
+	Q_UNUSED(member);
+	Q_UNUSED(Params);
+	return SB_PROGRESS(SB_ERR(SB_OtherError, QVariantList() << tr("Online certificate services are disabled in this build.")));
+#else
 	QString UpdateKey = Params["key"].toString();
 
 	QUrlQuery Query;
@@ -358,13 +372,18 @@ SB_PROGRESS COnlineUpdater::GetSupportCert(const QString& Serial, QObject* recei
 	StartJob(pJob, Url);
 	QObject::connect(pJob, SIGNAL(Certificate(const QByteArray&, const QVariantMap&)), receiver, member, Qt::QueuedConnection);
 	return SB_PROGRESS(OP_ASYNC, pJob->m_pProgress);
+#endif
 }
 
 extern "C" NTSTATUS NTAPI NtQueryInstallUILanguage(LANGID* LanguageId);
 
 bool COnlineUpdater::IsLockRequired()
 {
+#ifdef NO_INSTALLER_UPDATE
+	return true;
+#else
 	return false;
+#endif
 }
 
 void CGetCertJob::Finish(QNetworkReply* pReply)
@@ -516,6 +535,7 @@ void COnlineUpdater::Process()
 			}
 		}
 	}
+	#ifndef NO_INSTALLER_UPDATE
 	else if (g_CertInfo.active)
 	{
 		QDateTime LastUpdateDate = COnlineUpdater::GetLastUpdateDate();
@@ -537,6 +557,7 @@ void COnlineUpdater::Process()
 				UpdateTemplates();
 		}
 	}
+	#endif
 
 	if (m_CheckMode == ePendingUpdate || m_CheckMode == ePendingInstall)
 	{
@@ -558,7 +579,9 @@ void COnlineUpdater::Process()
 
 void COnlineUpdater::CheckForUpdates(bool bManual)
 {
+#ifdef NO_INSTALLER_UPDATE
 	return;
+#endif
 	if (m_CheckMode == eManual || m_CheckMode == eAuto)
 		return; // already in progress
 
@@ -862,6 +885,12 @@ COnlineUpdater::EUpdateScope COnlineUpdater::ScanUpdateFiles(const QVariantMap& 
 
 bool COnlineUpdater::DownloadUpdate(const QVariantMap& Update, EUpdateScope Scope, bool bAndApply)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(Update);
+	Q_UNUSED(Scope);
+	Q_UNUSED(bAndApply);
+	return false;
+#else
 	QJsonDocument doc(QJsonValue::fromVariant(Update).toObject());			
 	WriteStringToFile(GetUpdateDir(true) + "/" UPDATE_FILE, doc.toJson());
 	
@@ -904,6 +933,7 @@ bool COnlineUpdater::DownloadUpdate(const QVariantMap& Update, EUpdateScope Scop
 	m_pUpdateProgress->ShowMessage(tr("Downloading updates..."));
 
 	return true;
+#endif
 }
 
 void COnlineUpdater::OnPrepareOutput()
@@ -977,6 +1007,11 @@ void COnlineUpdater::OnPrepareFinished(int exitCode, QProcess::ExitStatus exitSt
 
 bool COnlineUpdater::ApplyUpdate(EUpdateScope Scope, bool bSilent)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(Scope);
+	Q_UNUSED(bSilent);
+	return false;
+#else
 	if (Scope != eTmpl)
 	{
 		if (!ShowCertWarningIfNeeded())
@@ -1038,6 +1073,7 @@ bool COnlineUpdater::ApplyUpdate(EUpdateScope Scope, bool bSilent)
 		return true;
 	}
 	return false;
+#endif
 }
 
 SB_RESULT(int) COnlineUpdater::RunUpdater(const QStringList& Params, bool bSilent, bool Wait)
@@ -1066,6 +1102,11 @@ SB_RESULT(int) COnlineUpdater::RunUpdater(const QStringList& Params, bool bSilen
 
 bool COnlineUpdater::DownloadInstaller(const QVariantMap& Release, bool bAndRun)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(Release);
+	Q_UNUSED(bAndRun);
+	return false;
+#else
 	if (m_RequestManager == NULL) 
 		m_RequestManager = new CNetworkAccessManager(30 * 1000, this);
 
@@ -1101,6 +1142,7 @@ bool COnlineUpdater::DownloadInstaller(const QVariantMap& Release, bool bAndRun)
 	}
 
 	return true;
+#endif
 }
 
 void COnlineUpdater::OnInstallerDownload(const QString& Path, const QVariantMap& Params)
@@ -1133,6 +1175,10 @@ void COnlineUpdater::OnInstallerDownload(const QString& Path, const QVariantMap&
 
 bool COnlineUpdater::RunInstaller(bool bSilent)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(bSilent);
+	return false;
+#else
 	if (!ShowCertWarningIfNeeded())
 		return false;
 
@@ -1167,16 +1213,21 @@ bool COnlineUpdater::RunInstaller(bool bSilent)
 		return true;
 	}
 	return false;
+#endif
 }
 
 void COnlineUpdater::UpdateTemplates()
 {
+#ifdef NO_INSTALLER_UPDATE
+	return;
+#else
 	QVariantMap Params;
     SB_PROGRESS Status = GetUpdates(this, SLOT(OnUpdateDataTmpl(const QVariantMap&, const QVariantMap&)), Params);
 	//if (Status.GetStatus() == OP_ASYNC) {
 	//	theGUI->AddAsyncOp(Status.GetValue());
 	//	Status.GetValue()->ShowMessage(tr("Checking for updates..."));
 	//}
+#endif
 }
 
 void COnlineUpdater::OnUpdateDataTmpl(const QVariantMap& Data, const QVariantMap& Params)

@@ -1588,8 +1588,11 @@ void CSandMan::CreateView(int iViewMode)
 
 void CSandMan::CheckForUpdates(bool bManual)
 {
+#ifdef NO_INSTALLER_UPDATE
 	return;
+#else
 	m_pUpdater->CheckForUpdates(bManual);
+#endif
 }
 
 #include "SandManTray.cpp"
@@ -3701,12 +3704,6 @@ SB_STATUS CSandMan::ReloadCert(QWidget* pWidget)
 	qDebug() << "g_CertInfo.type" << CSettingsWindow::GetCertType();
 	qDebug() << "g_CertInfo.level" << CSettingsWindow::GetCertLevel();
 #endif
-	g_CertInfo.active = true;
-	g_CertInfo.expired = false;
-	g_CertInfo.outdated = false;
-	g_CertInfo.type = eCertEternal;
-	g_CertInfo.level = eCertMaxLevel;
-
 	if (CERT_IS_TYPE(g_CertInfo, eCertEvaluation))
 	{
 		if (g_CertInfo.expired)
@@ -4712,11 +4709,15 @@ void CSandMan::OpenUrl(QUrl url)
 	}
 
 	if (scheme == "sbie") {
-			m_pUpdater->RunInstaller(false);
+#ifdef NO_INSTALLER_UPDATE
+		return;
+#else
+		m_pUpdater->RunInstaller(false);
 		if (path == "/apply")
 			m_pUpdater->ApplyUpdate(COnlineUpdater::eFull, false);
 		else
 			OpenUrl("https://sandboxie-plus.com/sandboxie" + path);
+#endif
 		return;
 	}
 

@@ -2,6 +2,7 @@
 TEMPLATE = app
 TARGET = SandMan
 PRECOMPILED_HEADER = stdafx.h
+DEFINES += LICENSE_FREE NO_INSTALLER_UPDATE
 
 QT += core gui network widgets widgets-private concurrent core-private qml qml-private
 
