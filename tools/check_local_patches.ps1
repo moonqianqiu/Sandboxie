@@ -95,6 +95,7 @@ Test-Pattern $Updater 'SB_PROGRESS COnlineUpdater::GetUpdates\([^}]*#ifdef NO_IN
 Test-Pattern $Updater 'SB_PROGRESS COnlineUpdater::GetSupportCert\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater GetSupportCert disabled'
 Test-Pattern $Updater 'bool COnlineUpdater::DownloadUpdate\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater DownloadUpdate disabled'
 Test-Pattern $Updater 'bool COnlineUpdater::RunInstaller\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater RunInstaller disabled'
+Test-Pattern $Updater 'void COnlineUpdater::Process\(\)\s*\{\s*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater Process scheduling disabled'
 
 # 19: GUI must not overwrite the certificate state returned by the driver.
 Test-NoPattern $SandMan 'g_CertInfo\.active\s*=\s*true;\s*g_CertInfo\.expired\s*=\s*false;' 'SandMan no certificate state forgery'

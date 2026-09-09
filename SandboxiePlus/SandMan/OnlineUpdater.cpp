@@ -501,6 +501,11 @@ bool COnlineUpdater::ShowCertWarningIfNeeded()
 
 void COnlineUpdater::Process() 
 {
+#ifdef NO_INSTALLER_UPDATE
+	// Internal builds do not schedule, prompt for, or apply online updates.
+	m_CheckMode = eInit;
+	return;
+#endif
 	int UpdateInterval = theConf->GetInt("Options/UpdateInterval", UPDATE_INTERVAL); // in seconds
 	QDateTime CurretnDate = QDateTime::currentDateTime();
 	time_t NextUpdateCheck = theConf->GetUInt64("Options/NextCheckForUpdates", 0);
