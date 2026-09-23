@@ -364,90 +364,95 @@ static std::wstring GetJSONStringSafe(const JSONObject& root, const std::wstring
 
 static BOOL GetCertificateFromServer(const CString& serial, CString& outCert, CString& outError)
 {
-    // Build query path
-    CString path = L"/get_cert.php?SN=" + serial;
+    // internal build: online certificate retrieval disabled
+    UNREFERENCED_PARAMETER(serial);
+    outError = L"Online certificate services are disabled in this build.";
+    return FALSE;
 
-    // Check for node-locked serial (5th char is 'N')
-    if (serial.GetLength() > 5 && towupper(serial[4]) == L'N') {
-        WCHAR hwid[40] = { 0 };
-        if (GetHWIDFromDriver(hwid, sizeof(hwid))) {
-            path += L"&HwId=" + CString(hwid);
-        }
-    }
-
-    // Check for renewal/upgrade serial (5th char is 'R' or 'U')
-    if (serial.GetLength() > 5) {
-        WCHAR type = towupper(serial[4]);
-        if (type == L'R' || type == L'U') {
-            CString updateKey = ReadUpdateKeyFromCert();
-            if (updateKey.IsEmpty()) {
-                outError = CMyMsg(type == L'U' ? MSG_7994 : MSG_7995);
-                return FALSE;
-            }
-            path += L"&UpdateKey=" + updateKey;
-        }
-    }
-
-    // Add hash key (same as Updater.cpp)
-    CString Section, UserName;
-    BOOL IsAdmin;
-    CSbieIni::GetInstance().GetUser(Section, UserName, IsAdmin);
-    DWORD Hash = wcstoul(Section.Mid(13), NULL, 16);
-
-    ULONGLONG RandID = 0;
-    SbieApi_Call(API_GET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
-    if (RandID == 0) {
-        srand(GetTickCount());
-        RandID = (ULONGLONG)(rand() & 0xFFFF) | ((ULONGLONG)(rand() & 0xFFFF) << 16) |
-            ((ULONGLONG)(rand() & 0xFFFF) << 32) | ((ULONGLONG)(rand() & 0xFFFF) << 48);
-        SbieApi_Call(API_SET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
-    }
-
-    wchar_t hashKey[26];
-    wsprintf(hashKey, L"%08X-%08X%08X", Hash, (DWORD)(RandID >> 32), (DWORD)RandID);
-    path += L"&HashKey=" + CString(hashKey);
-
-    // Make HTTP request
-    char* data = NULL;
-    if (!DownloadCertificateData(L"sandboxie-plus.com", path, &data, NULL)) {
-        outError = CMyMsg(MSG_7997);
-        return FALSE;
-    }
-
-    if (!data || !*data) {
-        outError = CMyMsg(MSG_7998);
-        if (data) free(data);
-        return FALSE;
-    }
-
-    // Check for JSON error response
-    if (data[0] == '{') {
-        JSONValue* jsonObject = JSON::Parse(data);
-        if (jsonObject && jsonObject->IsObject()) {
-            JSONObject root = jsonObject->AsObject();
-            std::wstring errorMsg = GetJSONStringSafe(root, L"errorMsg");
-            if (!errorMsg.empty())
-                outError = errorMsg.c_str();
-            else
-                outError = CMyMsg(MSG_7999);
-            delete jsonObject;
-        }
-        else {
-            outError = CMyMsg(MSG_7999);
-        }
-        free(data);
-        return FALSE;
-    }
-
-    // Success - convert to wide string
-    int len = MultiByteToWideChar(CP_UTF8, 0, data, -1, NULL, 0);
-    WCHAR* wdata = new WCHAR[len];
-    MultiByteToWideChar(CP_UTF8, 0, data, -1, wdata, len);
-    outCert = wdata;
-    delete[] wdata;
-    free(data);
-
-    return TRUE;
+    //// Build query path
+    //CString path = L"/get_cert.php?SN=" + serial;
+    //
+    //// Check for node-locked serial (5th char is 'N')
+    //if (serial.GetLength() > 5 && towupper(serial[4]) == L'N') {
+    //    WCHAR hwid[40] = { 0 };
+    //    if (GetHWIDFromDriver(hwid, sizeof(hwid))) {
+    //        path += L"&HwId=" + CString(hwid);
+    //    }
+    //}
+    //
+    //// Check for renewal/upgrade serial (5th char is 'R' or 'U')
+    //if (serial.GetLength() > 5) {
+    //    WCHAR type = towupper(serial[4]);
+    //    if (type == L'R' || type == L'U') {
+    //        CString updateKey = ReadUpdateKeyFromCert();
+    //        if (updateKey.IsEmpty()) {
+    //            outError = CMyMsg(type == L'U' ? MSG_7994 : MSG_7995);
+    //            return FALSE;
+    //        }
+    //        path += L"&UpdateKey=" + updateKey;
+    //    }
+    //}
+    //
+    //// Add hash key (same as Updater.cpp)
+    //CString Section, UserName;
+    //BOOL IsAdmin;
+    //CSbieIni::GetInstance().GetUser(Section, UserName, IsAdmin);
+    //DWORD Hash = wcstoul(Section.Mid(13), NULL, 16);
+    //
+    //ULONGLONG RandID = 0;
+    //SbieApi_Call(API_GET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
+    //if (RandID == 0) {
+    //    srand(GetTickCount());
+    //    RandID = (ULONGLONG)(rand() & 0xFFFF) | ((ULONGLONG)(rand() & 0xFFFF) << 16) |
+    //        ((ULONGLONG)(rand() & 0xFFFF) << 32) | ((ULONGLONG)(rand() & 0xFFFF) << 48);
+    //    SbieApi_Call(API_SET_SECURE_PARAM, 3, L"RandID", (ULONG_PTR)&RandID, sizeof(RandID));
+    //}
+    //
+    //wchar_t hashKey[26];
+    //wsprintf(hashKey, L"%08X-%08X%08X", Hash, (DWORD)(RandID >> 32), (DWORD)RandID);
+    //path += L"&HashKey=" + CString(hashKey);
+    //
+    //// Make HTTP request
+    //char* data = NULL;
+    //if (!DownloadCertificateData(L"sandboxie-plus.com", path, &data, NULL)) {
+    //    outError = CMyMsg(MSG_7997);
+    //    return FALSE;
+    //}
+    //
+    //if (!data || !*data) {
+    //    outError = CMyMsg(MSG_7998);
+    //    if (data) free(data);
+    //    return FALSE;
+    //}
+    //
+    //// Check for JSON error response
+    //if (data[0] == '{') {
+    //    JSONValue* jsonObject = JSON::Parse(data);
+    //    if (jsonObject && jsonObject->IsObject()) {
+    //        JSONObject root = jsonObject->AsObject();
+    //        std::wstring errorMsg = GetJSONStringSafe(root, L"errorMsg");
+    //        if (!errorMsg.empty())
+    //            outError = errorMsg.c_str();
+    //        else
+    //            outError = CMyMsg(MSG_7999);
+    //        delete jsonObject;
+    //    }
+    //    else {
+    //        outError = CMyMsg(MSG_7999);
+    //    }
+    //    free(data);
+    //    return FALSE;
+    //}
+    //
+    //// Success - convert to wide string
+    //int len = MultiByteToWideChar(CP_UTF8, 0, data, -1, NULL, 0);
+    //WCHAR* wdata = new WCHAR[len];
+    //MultiByteToWideChar(CP_UTF8, 0, data, -1, wdata, len);
+    //outCert = wdata;
+    //delete[] wdata;
+    //free(data);
+    //
+    //return TRUE;
 }
 
 

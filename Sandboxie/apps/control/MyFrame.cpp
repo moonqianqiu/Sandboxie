@@ -2187,34 +2187,35 @@ void CMyFrame::OnTimer(UINT_PTR nIDEvent)
 		// update check
 		//
 
-		if (! m_hidden)
-		{
-			__int64 NextUpdateCheck;
-			CUserSettings::GetInstance().GetNum64(_NextUpdateCheck, NextUpdateCheck, 0);
-			if(NextUpdateCheck == 0)
-				CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + 7 * 24 * 60 * 60);
-			else if(NextUpdateCheck != -1 && time(NULL) >= NextUpdateCheck)
-			{
-				BOOL UpdateCheckNotify;
-				CUserSettings::GetInstance().GetBool(_UpdateCheckNotify, UpdateCheckNotify, TRUE);
-				if (UpdateCheckNotify)
-				{
-					static BOOLEAN update_dlg_open = FALSE;
-					if (!update_dlg_open) {
-						update_dlg_open = TRUE;
-						CUpdateDialog dlg(this);
-						if(dlg.DoModal() == 0)
-							CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + 1 * 24 * 60 * 60);
-						update_dlg_open = FALSE;
-					}
-				}
-				else
-				{
-					CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + 1 * 24 * 60 * 60);
-					CUpdater::GetInstance().CheckUpdates(this, false);
-				}
-			}
-		}
+		// internal build: no automatic online update checks
+		//if (! m_hidden)
+		//{
+		//	__int64 NextUpdateCheck;
+		//	CUserSettings::GetInstance().GetNum64(_NextUpdateCheck, NextUpdateCheck, 0);
+		//	if(NextUpdateCheck == 0)
+		//		CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + 7 * 24 * 60 * 60);
+		//	else if(NextUpdateCheck != -1 && time(NULL) >= NextUpdateCheck)
+		//	{
+		//		BOOL UpdateCheckNotify;
+		//		CUserSettings::GetInstance().GetBool(_UpdateCheckNotify, UpdateCheckNotify, TRUE);
+		//		if (UpdateCheckNotify)
+		//		{
+		//			static BOOLEAN update_dlg_open = FALSE;
+		//			if (!update_dlg_open) {
+		//				update_dlg_open = TRUE;
+		//				CUpdateDialog dlg(this);
+		//				if(dlg.DoModal() == 0)
+		//					CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + 1 * 24 * 60 * 60);
+		//				update_dlg_open = FALSE;
+		//			}
+		//		}
+		//		else
+		//		{
+		//			CUserSettings::GetInstance().SetNum64(_NextUpdateCheck, time(NULL) + 1 * 24 * 60 * 60);
+		//			CUpdater::GetInstance().CheckUpdates(this, false);
+		//		}
+		//	}
+		//}
 
         //
         // refresh processes

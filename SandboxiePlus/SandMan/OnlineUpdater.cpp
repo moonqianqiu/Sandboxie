@@ -1083,6 +1083,12 @@ bool COnlineUpdater::ApplyUpdate(EUpdateScope Scope, bool bSilent)
 
 SB_RESULT(int) COnlineUpdater::RunUpdater(const QStringList& Params, bool bSilent, bool Wait)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(Params);
+	Q_UNUSED(bSilent);
+	Q_UNUSED(Wait);
+	return SB_RESULT(int)(SB_ERR(SB_OtherError, QVariantList() << tr("Online updates are disabled in this build.")));
+#endif
 	if (bSilent) {
 		SB_RESULT(int) Result = theAPI->RunUpdateUtility(Params, 2, Wait);
 		if (!Result.IsError())

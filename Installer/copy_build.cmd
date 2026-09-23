@@ -198,8 +198,9 @@ ECHO Copying Sandboxie Tools
 
 copy /y %~dp0..\SandboxieTools\%archPath%\Release\ImBox.exe %instPath%\
 copy /y %~dp0..\SandboxieTools\%archPath%\Release\ImBox.pdb %instPath%\
-copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.exe %instPath%\
-copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.pdb %instPath%\
+rem internal build: UpdUtil removed from packages (no online update tool)
+rem copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.exe %instPath%\
+rem copy /y %~dp0..\SandboxieTools\%archPath%\Release\UpdUtil.pdb %instPath%\
 copy /y %~dp0..\SandboxieTools\%archPath%\Release\MiniDump.exe %instPath%\
 copy /y %~dp0..\SandboxieTools\%archPath%\Release\MiniDump.pdb %instPath%\
 

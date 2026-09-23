@@ -999,7 +999,8 @@ Install2:
 ;	!insertmacro InstallSystemDll "mfc140u.dll" false
 ;!endif
 
-    Call CheckUpdates
+    ; internal build: no install-time online update check
+    ;Call CheckUpdates
     Call WriteProductKey
     Call WriteShortCuts
 
@@ -1074,7 +1075,8 @@ WriteLoop:
 ;    File /oname=${SBIEDRV_SYSX} "${BIN_ROOT}\SbieDrv.sys.w10"
 
     File /oname=KmdUtil.exe "${BIN_ROOT}\KmdUtil.Exe"
-    File /oname=UpdUtil.exe "${BIN_ROOT}\UpdUtil.Exe"
+    ; internal build: UpdUtil removed from packages (no online update tool)
+    ;File /oname=UpdUtil.exe "${BIN_ROOT}\UpdUtil.Exe"
 
     File /oname=SboxHostDll.dll			   "${BIN_ROOT}\SboxHostDll.dll"
 

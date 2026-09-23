@@ -100,6 +100,50 @@ Test-Pattern $Updater 'void COnlineUpdater::Process\(\)\s*\{\s*#ifdef NO_INSTALL
 # 19: GUI must not overwrite the certificate state returned by the driver.
 Test-NoPattern $SandMan 'g_CertInfo\.active\s*=\s*true;\s*g_CertInfo\.expired\s*=\s*false;' 'SandMan no certificate state forgery'
 
+# 20-22: extension — remaining OnlineUpdater entry points must stay guarded.
+Test-Pattern $Updater 'void COnlineUpdater::CheckForUpdates\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater CheckForUpdates disabled'
+Test-Pattern $Updater 'bool COnlineUpdater::ApplyUpdate\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater ApplyUpdate disabled'
+Test-Pattern $Updater 'bool COnlineUpdater::DownloadInstaller\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater DownloadInstaller disabled'
+Test-Pattern $Updater 'void COnlineUpdater::UpdateTemplates\(\)\s*\{\s*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater UpdateTemplates disabled'
+Test-Pattern $Updater 'bool COnlineUpdater::IsLockRequired\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater IsLockRequired disabled'
+Test-Pattern $Updater 'SB_RESULT\(int\) COnlineUpdater::RunUpdater\([^}]*#ifdef NO_INSTALLER_UPDATE' 'OnlineUpdater RunUpdater disabled'
+
+# 23a: the root mechanism — driver must keep its hardcoded eternal certificate
+# (KphValidateCertificate must not fall back to parsing Certificate.dat).
+Test-Pattern $Verify 'Verify_CertInfo\.type\s*=\s*eCertEternal' 'verify.c KphValidateCertificate hardcodes eternal cert'
+Test-Pattern $Verify 'NTSTATUS KphVerifyCurrentProcess\(\)\s*\{\s*return STATUS_SUCCESS;' 'verify.c KphVerifyCurrentProcess stubbed'
+
+# 26-27: SandMan must not reach the updater from the menu or the sbie:// scheme.
+Test-Pattern $SandMan 'void CSandMan::CheckForUpdates\(bool bManual\)\s*\{?\s*\r?\n\{?\s*#ifdef NO_INSTALLER_UPDATE' 'SandMan CheckForUpdates disabled'
+Test-Pattern $SandMan 'if \(scheme == "sbie"\) \{\s*#ifdef NO_INSTALLER_UPDATE' 'SandMan sbie:// scheme disabled'
+
+# 28: certificate refresh must be a no-op.
+Test-Pattern 'SandboxiePlus/SandMan/Windows/SettingsWindow.cpp' 'bool CSettingsWindow::CertRefreshRequired\(\)\s*\{\s*#ifdef NO_INSTALLER_UPDATE' 'SettingsWindow CertRefreshRequired disabled'
+
+# 29: no dead references to the removed COnlineUpdater::UpdateCert.
+Test-NoPattern 'SandboxiePlus/SandMan/Windows/SupportDialog.cpp' 'm_pUpdater->UpdateCert' 'SupportDialog no UpdateCert references'
+
+# 30-32: Classic UI must not contact the update/certificate servers.
+$ClassicUpdater = 'Sandboxie/apps/control/Updater.cpp'
+$ClassicFrame   = 'Sandboxie/apps/control/MyFrame.cpp'
+$ClassicAbout   = 'Sandboxie/apps/control/AboutDialog.cpp'
+Test-Pattern $ClassicUpdater 'bool CUpdater::CheckUpdates\([^{]*\{[^}]*online update checks disabled[^}]*return false;' 'Classic Updater CheckUpdates disabled'
+Test-Pattern $ClassicUpdater '//CreateThread\(NULL, 0, UpdaterServiceThread' 'Classic Updater thread spawn commented'
+Test-NoPattern $ClassicFrame '(?m)^\s*CUpdater::GetInstance\(\)\.CheckUpdates\(this, false\);' 'Classic MyFrame no active auto update check'
+Test-Pattern $ClassicFrame '//\s*CUpdater::GetInstance\(\)\.CheckUpdates\(this, false\);' 'Classic MyFrame update block commented'
+Test-Pattern $ClassicAbout 'static BOOL GetCertificateFromServer\([^{]*\{[^}]*certificate retrieval disabled[^}]*return FALSE;' 'Classic AboutDialog cert download disabled'
+Test-NoPattern $ClassicAbout '(?m)^\s*DownloadCertificateData\(L"sandboxie-plus\.com"' 'Classic AboutDialog no active cert HTTP call'
+
+# 33-36: UpdUtil must not run or ship at install time.
+$Iss  = 'Installer/Sandboxie-Plus.iss'
+$Nsi  = 'Sandboxie/install/SandboxieVS.nsi'
+$Copy = 'Installer/copy_build.cmd'
+Test-Pattern $Iss ';\s*Filename: "\{app\}\\UpdUtil\.exe"' 'Plus installer UpdUtil run commented'
+Test-Pattern $Iss ';\s*Name: "RefreshBuild"' 'Plus installer RefreshBuild task commented'
+Test-Pattern $Nsi ';\s*Call CheckUpdates' 'Classic installer update check commented'
+Test-Pattern $Nsi ';\s*File /oname=UpdUtil\.exe' 'Classic installer UpdUtil packaging commented'
+Test-Pattern $Copy 'rem\s+copy /y.*UpdUtil\.exe' 'copy_build no longer stages UpdUtil'
+
 Write-Host ""
 if ($script:failures -gt 0) {
     Write-Host "BYPASS SELF-CHECK FAILED: $script:failures of $script:checks checks failed."
