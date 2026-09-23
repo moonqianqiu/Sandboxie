@@ -373,3 +373,5 @@ SandboxiePlus/Build_*
 *.qm
 
 memory.md
+.zcode
+.vscode
