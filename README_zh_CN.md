@@ -179,7 +179,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - timinoun - 匈牙利语（通过电子邮件提供）
 - isaak654、DerivativeOfLog7 - 意大利语
 - takahiro-itou、lllIIIlll - 日语
-- VenusGirl - 韩语
+- VenusGirl、꿈을꾸는 파랑새(Sakai) - 韩语
 - divinity76 - 书面挪威语
 - 7zip、AndrzejRafalowski - 波兰语（[单独提供](https://forum.xanasoft.com/threads/polish-translation.4/page-2)）
 - JNylson - 葡萄牙语及巴西葡萄牙语
@@ -190,7 +190,7 @@ Binary Ninja 是一个多平台交互式反汇编、反编译和二进制分析�
 - SuperMaxusa、lufog、Nazar1ky - 乌克兰语
 - GunGunGun - 越南语
 
-所有译者在提交翻译前，建议先查看[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
+提交翻译前，请阅读[翻译协作与署名规范](./TRANSLATING.md#translation-collaboration-and-attribution)及[本地化说明和提示](https://github.com/sandboxie-plus/Sandboxie/discussions/1123)。
 
 ## 📚 文档翻译人员
 
