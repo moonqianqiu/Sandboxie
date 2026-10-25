@@ -62,12 +62,19 @@ $Util   = 'Sandboxie/core/drv/util.c'
 $Updater = 'SandboxiePlus/SandMan/OnlineUpdater.cpp'
 $SandMan = 'SandboxiePlus/SandMan/SandMan.cpp'
 
-# 1-4 verify.c: the 4 license stubs must return their (upstream) status,
-# not the hardcoded STATUS_SUCCESS that masks real failures.
+# 1-5 verify.c: the four signature primitives (KphVerifySignature/File/Buffer/
+# ReadSignature) are NOT stubbed - they keep the full upstream implementation
+# (real BCrypt signature comparison).  Their only remaining callers verify
+# dyndata / secure params and fail closed, so pin both the real comparison and
+# the honest plumbing endings; neither may be replaced by hardcoded success.
+Test-Pattern $Verify 'BCryptVerifySignature\(keyHandle' 'verify.c KphVerifySignature performs real signature check'
 Test-Pattern $Verify 'BCryptCloseAlgorithmProvider\(signAlgHandle, 0\);\r?\n\r?\n\s+return status;' 'verify.c KphVerifySignature returns status'
 Test-Pattern $Verify 'return status;\r?\n\}\r?\n\r?\nNTSTATUS KphVerifyBuffer\(' 'verify.c KphVerifyFile returns status'
 Test-Pattern $Verify 'MyFreeHash\(&hashObj\);\r?\n\r?\n\s+return status;' 'verify.c KphVerifyBuffer returns status'
 Test-Pattern $Verify 'return status;\r?\n\}\r?\n\r?\nNTSTATUS KphVerifyCurrentProcess\(\)' 'verify.c KphReadSignature returns status'
+
+# 6 verify.c: the root mechanism must not read any certificate file at all.
+Test-NoPattern $Verify 'Certificate\.dat' 'verify.c does not read Certificate.dat'
 
 # 5-6 util.c: keep the real code-integrity and caller-signature probes.
 Test-NoPattern $Util '_FX BOOLEAN MyIsTestSigning\(void\)\r?\n\{\r?\n#ifdef LICENSE_FREE\r?\n\s+return TRUE;' 'util.c no unconditional test-signing bypass'
