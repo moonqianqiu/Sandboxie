@@ -99,9 +99,9 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Verify local bypass patches
-        shell: pwsh
+        shell: bash
         run: |
-          ./tools/check_local_patches.ps1
+          bash tools/check_local_patches.sh
 
       - name: Load Variables from buildVariables.cmd
         shell: cmd
