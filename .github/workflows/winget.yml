@@ -1,10 +1,13 @@
 name: Publish to WinGet
 
-on:
-  release:
-    types: [released]
-  # Optional: allow manual runs for testing the sync or to retry publishing
-  workflow_dispatch:
+# This fork never publishes to WinGet: all triggers are disabled, matching the
+# commented out push/pull_request triggers in main.yml, so nothing here can
+# POST to sandboxie-plus/winget-pkgs.
+# on:
+#   release:
+#     types: [released]
+#   # Optional: allow manual runs for testing the sync or to retry publishing
+#   workflow_dispatch:
 
 jobs:
   # Trigger upstream sync in sandboxie-plus/winget-pkgs (non-default branch)

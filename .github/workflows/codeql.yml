@@ -2,37 +2,42 @@ name: "CodeQL"
 
 on:
   workflow_dispatch:
-  push:
-    branches: [master]
-    paths:
-      - '**.c'
-      - '**.cpp'
-      - '**.h'
-      - '**.hpp'
-      - '**.def'
-      - '**.rc'
-      - '**.idl'
-      - '**.sln'
-      - '**.vcxproj'
-      - '**.vcxproj.filters'
-      - '**.props'
-  pull_request:
-    types: [opened, reopened, synchronize]
-    branches: [master]
-    paths:
-      - '**.c'
-      - '**.cpp'
-      - '**.h'
-      - '**.hpp'
-      - '**.def'
-      - '**.rc'
-      - '**.idl'
-      - '**.sln'
-      - '**.vcxproj'
-      - '**.vcxproj.filters'
-      - '**.props'
-  schedule:
-    - cron: '33 7 * * 6'
+
+  # This fork scans only on demand: the push/pull_request/schedule triggers are
+  # disabled (same posture as main.yml and winget.yml), so no scan runs by
+  # itself and nothing is uploaded without an explicit run. It also keeps
+  # merging upstream from using up Actions minutes on each push.
+  # push:
+  #   branches: [master]
+  #   paths:
+  #     - '**.c'
+  #     - '**.cpp'
+  #     - '**.h'
+  #     - '**.hpp'
+  #     - '**.def'
+  #     - '**.rc'
+  #     - '**.idl'
+  #     - '**.sln'
+  #     - '**.vcxproj'
+  #     - '**.vcxproj.filters'
+  #     - '**.props'
+  # pull_request:
+  #   types: [opened, reopened, synchronize]
+  #   branches: [master]
+  #   paths:
+  #     - '**.c'
+  #     - '**.cpp'
+  #     - '**.h'
+  #     - '**.hpp'
+  #     - '**.def'
+  #     - '**.rc'
+  #     - '**.idl'
+  #     - '**.sln'
+  #     - '**.vcxproj'
+  #     - '**.vcxproj.filters'
+  #     - '**.props'
+  # schedule:
+  #   - cron: '33 7 * * 6'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}

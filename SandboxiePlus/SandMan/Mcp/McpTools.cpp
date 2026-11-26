@@ -3,7 +3,7 @@
 #include "McpDocs.h"
 #include "McpKnowledge.h"
 #include "../SandMan.h"
-// for g_CertInfo - the certificate state lives there
+// No supporter-certificate gating in this fork (see tools/check_local_patches.sh).
 #include "../Windows/SettingsWindow.h"
 #include "../SbiePlusAPI.h"
 #include "../Helpers/IniHighlighter.h"
@@ -493,56 +493,14 @@ static QJsonObject CallVersion()
 	Data["architecture"] = QSysInfo::currentCpuArchitecture();
 	Data["product"] = QSysInfo::prettyProductName();
 
-	// Which supporter-certificate options are in force. This belongs with the
-	// version because it answers the same question - what will work on this
-	// installation - and without it an agent recommends settings the user has
-	// no licence for, which looks like a fix and does nothing.
-	//
-	// Nothing identifying is exposed: SCertInfo is a bitfield of states and
-	// feature bits, with no owner, address or serial in it.
-	QJsonObject Cert;
-	Cert["active"] = (bool)g_CertInfo.active;
-	Cert["expired"] = (bool)g_CertInfo.expired;
-	Cert["outdatedForThisBuild"] = (bool)g_CertInfo.outdated;
-	Cert["inGracePeriod"] = (bool)g_CertInfo.grace_period;
-	Cert["type"] = (int)g_CertInfo.type;
-	Cert["level"] = (int)g_CertInfo.level;
-
-	QJsonObject Options;
-	Options["isolatedDesktops"] = (bool)g_CertInfo.opt_desk;
-	Options["advancedNetwork"] = (bool)g_CertInfo.opt_net;
-	Options["boxEncryption"] = (bool)g_CertInfo.opt_enc;
-	Options["enhancedSecurityBoxTypes"] = (bool)g_CertInfo.opt_sec;
-	Cert["options"] = Options;
-	Data["certificate"] = Cert;
+	// Certificate gating is disabled in this fork: report only build and
+	// runtime facts here, never the certificate state.
 
 	QString Text = QObject::tr("Sandboxie-Plus %1 on %2 (%3, kernel %4)")
 		.arg(Data["sandboxie"].toString())
 		.arg(Data["product"].toString())
 		.arg(Data["architecture"].toString())
 		.arg(Data["kernel"].toString());
-
-	if (!g_CertInfo.active) {
-		Text += QObject::tr("\n\nNo active supporter certificate. Settings whose Requirements name one "
-			"will not take effect here - check with config_validate before recommending them.");
-	}
-	else {
-		QStringList On;
-		if (g_CertInfo.opt_desk) On.append(QObject::tr("isolated desktops"));
-		if (g_CertInfo.opt_net)  On.append(QObject::tr("advanced network features"));
-		if (g_CertInfo.opt_enc)  On.append(QObject::tr("box encryption and protection"));
-		if (g_CertInfo.opt_sec)  On.append(QObject::tr("enhanced security box types"));
-
-		Text += QObject::tr("\n\nSupporter certificate: active");
-		if (g_CertInfo.expired)
-			Text += QObject::tr(" but expired%1").arg(g_CertInfo.grace_period
-				? QObject::tr(", inside the renewal grace period") : QString());
-		if (g_CertInfo.outdated)
-			Text += QObject::tr(", and no longer valid for this build");
-		Text += On.isEmpty()
-			? QObject::tr(". No optional features unlocked.")
-			: QObject::tr(". Unlocked: %1.").arg(On.join(", "));
-	}
 
 	return MakeTextResult(Text, Data);
 }

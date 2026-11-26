@@ -91,15 +91,20 @@ CUpdater &CUpdater::GetInstance()
 
 bool CUpdater::CheckUpdates(CWnd *pParentWnd, bool bManual)
 {
-	if (m_update_pending)
-		return false;
+	// internal build: online update checks disabled (no contact with the update server)
+	UNREFERENCED_PARAMETER(pParentWnd);
+	UNREFERENCED_PARAMETER(bManual);
+	return false;
 
-	ULONG ThreadId;
-	ULONG_PTR *ThreadArgs = new ULONG_PTR[2];
-	ThreadArgs[0] = (ULONG_PTR)pParentWnd->m_hWnd;
-	ThreadArgs[1] = bManual ? 1 : 0;
-	CreateThread(NULL, 0, UpdaterServiceThread, ThreadArgs, 0, &ThreadId);
-	return true;
+	//if (m_update_pending)
+	//	return false;
+	//
+	//ULONG ThreadId;
+	//ULONG_PTR *ThreadArgs = new ULONG_PTR[2];
+	//ThreadArgs[0] = (ULONG_PTR)pParentWnd->m_hWnd;
+	//ThreadArgs[1] = bManual ? 1 : 0;
+	//CreateThread(NULL, 0, UpdaterServiceThread, ThreadArgs, 0, &ThreadId);
+	//return true;
 }
 
 

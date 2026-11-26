@@ -2599,10 +2599,14 @@ void CSettingsWindow::OnTab(QWidget* pTab)
 			TryRefreshCert(this, this, SLOT(OnCertData(const QByteArray&, const QVariantMap&)));
 
 		if (ui.lblCurrent->text().isEmpty()) {
+#ifdef NO_INSTALLER_UPDATE
+			ui.lblCurrent->setText(tr("Online update is disabled in this build."));
+#else
 			if (ui.chkAutoUpdate->checkState())
 				GetUpdates();
 			else
 				ui.lblCurrent->setText(tr("<a href=\"check\">Check Now</a>"));
+#endif
 		}
 	}
 	else if (pTab == ui.tabAddons)
@@ -3244,6 +3248,9 @@ QString MakeRunEntry(const QVariantMap& Entry)
 
 void CSettingsWindow::GetUpdates()
 {
+#ifdef NO_INSTALLER_UPDATE
+	return;
+#endif
 	QVariantMap Params;
 	Params["channel"] = "all";
 	theGUI->m_pUpdater->GetUpdates(this, SLOT(OnUpdateData(const QVariantMap&, const QVariantMap&)), Params);
@@ -3520,6 +3527,10 @@ void CSettingsWindow::UpdateCert()
 
 void CSettingsWindow::OnGetCert()
 {
+#ifdef NO_INSTALLER_UPDATE
+	CSandMan::ShowMessageBox(this, QMessageBox::Information, tr("Online certificate services are disabled in this build."));
+	return;
+#else
 	QByteArray Certificate;
 	if (!ui.txtCertificate->property("hidden").toBool())
 		Certificate = ui.txtCertificate->toPlainText().toUtf8();
@@ -3565,6 +3576,7 @@ void CSettingsWindow::OnGetCert()
 		theGUI->AddAsyncOp(Status.GetValue());
 		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
 	}
+#endif
 }
 
 void CSettingsWindow::OnStartEval()
@@ -3574,6 +3586,12 @@ void CSettingsWindow::OnStartEval()
 
 void CSettingsWindow::StartEval(QWidget* parent, QObject* receiver, const char* member)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(parent);
+	Q_UNUSED(receiver);
+	Q_UNUSED(member);
+	return;
+#else
 	QString Name = theConf->GetString("User/Name", QString::fromLocal8Bit(qgetenv("USERNAME")));
 	//#ifdef _DEBUG
 	//	Name = QInputDialog::getText(parent, tr("Sandboxie-Plus - Get EVALUATION Certificate"), tr("Please enter your Name"), QLineEdit::Normal, Name);
@@ -3593,6 +3611,7 @@ void CSettingsWindow::StartEval(QWidget* parent, QObject* receiver, const char* 
 		theGUI->AddAsyncOp(Status.GetValue());
 		Status.GetValue()->ShowMessage(tr("Retrieving certificate..."));
 	}
+#endif
 }
 
 void CSettingsWindow::OnCertData(const QByteArray& Certificate, const QVariantMap& Params)
@@ -3787,6 +3806,9 @@ bool CSettingsWindow::ApplyCertificate(const QByteArray &Certificate, QWidget* w
 
 bool CSettingsWindow::CertRefreshRequired()
 {
+#ifdef NO_INSTALLER_UPDATE
+	return false;
+#else
 	if (g_CertInfo.active) {
 		if (COnlineUpdater::IsLockRequired() && g_CertInfo.type != eCertEternal && g_CertInfo.type != eCertContributor)
 		{
@@ -3799,10 +3821,17 @@ bool CSettingsWindow::CertRefreshRequired()
 	}
 
 	return false;
+#endif
 }
 
 bool CSettingsWindow::TryRefreshCert(QWidget* parent, QObject* receiver, const char* member)
 {
+#ifdef NO_INSTALLER_UPDATE
+	Q_UNUSED(parent);
+	Q_UNUSED(receiver);
+	Q_UNUSED(member);
+	return false;
+#else
 	if (theConf->GetInt("Options/AskCertRefresh", -1) != 1)
 	{
 		bool State = false;
@@ -3824,6 +3853,7 @@ bool CSettingsWindow::TryRefreshCert(QWidget* parent, QObject* receiver, const c
 	}
 
 	return true;
+#endif
 }
 
 void WindowsMoveFile(const QString& From, const QString& To)
